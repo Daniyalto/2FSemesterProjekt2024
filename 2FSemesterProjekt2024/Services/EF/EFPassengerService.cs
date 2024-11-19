@@ -12,5 +12,10 @@ namespace _2FSemesterProjekt2024.Services.EF
         {
             _context = context;
         }
+
+        public IEnumerable<Passenger> GetPassengers()
+        {
+            return _context.Passengers;
+        }
     }
 }
