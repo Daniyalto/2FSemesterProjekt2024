@@ -1,3 +1,7 @@
+using _2FSemesterProjekt2024.Models;
+using _2FSemesterProjekt2024.Services.EF;
+using _2FSemesterProjekt2024.Services.Interfaces;
+
 namespace _2FSemesterProjekt2024
 {
     public class Program
@@ -8,6 +12,11 @@ namespace _2FSemesterProjekt2024
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<DriverDBContext>();
+
+            builder.Services.AddTransient<IBookingService, EFBookingService>();
+            builder.Services.AddTransient<IDriverService, EFDriverService>();
+            builder.Services.AddTransient<IPassengerService, EFPassengerService>();
 
             var app = builder.Build();
 
