@@ -6,5 +6,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
     {
         public IEnumerable<Driver> GetDrivers();
 
+        public void AddDriver(Driver driver);
+
     }
 }

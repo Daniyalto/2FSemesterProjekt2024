@@ -17,5 +17,11 @@ namespace _2FSemesterProjekt2024.Services.EF
         {
             return _context.Drivers;
         }
+
+        public void AddDriver(Driver driver)
+        {
+            _context.Drivers.Add(driver);
+            _context.SaveChanges();
+        }
     }
 }
