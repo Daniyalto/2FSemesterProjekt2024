@@ -23,5 +23,16 @@ namespace _2FSemesterProjekt2024.Services.EF
             _context.Drivers.Add(driver);
             _context.SaveChanges();
         }
+
+        public void DeleteDriver(Driver driver)
+        {
+            _context.Drivers.Remove(driver);
+            _context.SaveChanges();
+        }
+
+        public Driver GetDrivers(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
