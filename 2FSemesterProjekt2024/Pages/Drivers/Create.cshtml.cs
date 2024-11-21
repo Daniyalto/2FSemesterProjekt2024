@@ -21,7 +21,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
                 return Page();
             }
             driverService.AddDriver(Driver);
-            return RedirectToPage("GetDriver");
+            return RedirectToPage("GetDrivers");
         }
     }
 
