@@ -12,7 +12,7 @@ namespace _2FSemesterProjekt2024.Services.EF
         {
             _context = context;
         }
-
+        
         public IEnumerable<Passenger> GetPassengers()
         {
             return _context.Passengers;
@@ -22,5 +22,12 @@ namespace _2FSemesterProjekt2024.Services.EF
         {
             return _context.Passengers.Where(x => x.PassengerId == id);
         }
+        
+        public void AddPassenger(Passenger passenger)
+        {
+            _context.Passengers.Add(passenger);
+            _context.SaveChanges();
+        }
     }
+
 }

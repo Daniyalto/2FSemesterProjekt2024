@@ -8,5 +8,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
 
         public IEnumerable<Passenger> GetPassengerById(int id);
 
+      
+        public void AddPassenger(Passenger passenger);
     }
 }
