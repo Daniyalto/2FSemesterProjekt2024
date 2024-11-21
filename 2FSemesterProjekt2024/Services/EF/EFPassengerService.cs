@@ -28,6 +28,11 @@ namespace _2FSemesterProjekt2024.Services.EF
             _context.Passengers.Add(passenger);
             _context.SaveChanges();
         }
+        public void DeletePassenger(Passenger passenger)
+        {
+            _context.Passengers.Remove(passenger);
+            _context.SaveChanges();
+        }
     }
 
 }

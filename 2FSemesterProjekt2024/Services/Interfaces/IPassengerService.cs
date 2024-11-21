@@ -1,4 +1,5 @@
 ﻿using _2FSemesterProjekt2024.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2FSemesterProjekt2024.Services.Interfaces
 {
@@ -10,5 +11,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
 
       
         public void AddPassenger(Passenger passenger);
+
+        public void DeletePassenger(Passenger passenger);
     }
 }
