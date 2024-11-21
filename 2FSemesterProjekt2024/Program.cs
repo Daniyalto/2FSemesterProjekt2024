@@ -1,6 +1,7 @@
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services.EF;
 using _2FSemesterProjekt2024.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2FSemesterProjekt2024
 {
@@ -12,7 +13,7 @@ namespace _2FSemesterProjekt2024
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<DriverDBContext>();
+            builder.Services.AddDbContext<DriverDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Data Source=mssql3.unoeuro.com;Initial Catalog=jbased_dk_db_driver_db;User ID=jbased_dk;Password=********;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False")));
 
             builder.Services.AddTransient<IBookingService, EFBookingService>();
             builder.Services.AddTransient<IDriverService, EFDriverService>();
