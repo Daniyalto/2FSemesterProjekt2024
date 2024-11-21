@@ -12,5 +12,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
 
         void DeleteDriver(Driver driver);
 
+        public void UpdateDriver(Driver driver);
+
     }
 }

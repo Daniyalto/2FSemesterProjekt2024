@@ -1,5 +1,6 @@
 ﻿using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace _2FSemesterProjekt2024.Services.EF
 {
@@ -33,6 +34,12 @@ namespace _2FSemesterProjekt2024.Services.EF
         public Driver GetDrivers(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void UpdateDriver(Driver driver)
+        {
+            _context.Update(driver);
+            _context.SaveChanges();
         }
     }
 }
