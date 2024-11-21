@@ -14,6 +14,6 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
 
         public void DeletePassenger(Passenger passenger);
 
-        public void UpdatePassenger(Passenger);
+        public void UpdatePassenger(Passenger passenger);
     }
 }
