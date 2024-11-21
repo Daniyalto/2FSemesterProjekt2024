@@ -12,5 +12,12 @@ namespace _2FSemesterProjekt2024.Services.EF
         {
             _context = context;
         }
+
+        public void AddPassenger(Passenger passenger)
+        {
+            _context.Passengers.Add(passenger);
+            _context.SaveChanges();
+        }
     }
+
 }
