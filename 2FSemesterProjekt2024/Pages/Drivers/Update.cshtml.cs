@@ -28,7 +28,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
             Drivers = driverService.GetDriversById(id);
             return Page();
         }
-        
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
