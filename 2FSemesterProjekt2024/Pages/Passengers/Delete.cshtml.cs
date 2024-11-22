@@ -19,7 +19,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
         }
         public void OnGet(int id)
         {
-            Passenger = passengerService.GetPassengers(id);
+            Passenger = passengerService.GetPassengerById(id);
         }
         public IActionResult OnPost()
         {
