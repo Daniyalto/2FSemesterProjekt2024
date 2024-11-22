@@ -31,9 +31,9 @@ namespace _2FSemesterProjekt2024.Services.EF
             _context.SaveChanges();
         }
 
-        public Driver GetDrivers(int id)
+        public IEnumerable<Driver> GetDriversById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Drivers.Where(x => x.DriverId == id);
         }
 
         public void UpdateDriver(Driver driver)
