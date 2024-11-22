@@ -5,24 +5,36 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _2FSemesterProjekt2024.Pages.Drivers
 {
-    public class CreateModel : PageModel
+    public class UpdateModel : PageModel
     {
-        [BindProperty]
-        public Driver Driver { get; set; }
-        private IDriverService driverService;
-        public CreateModel(IDriverService service)
+        private readonly IDriverService driverService;
+
+        public UpdateModel(IDriverService service)
         {
             driverService = service;
         }
+
+        [BindProperty]
+        public Driver Driver { get; set; }
+
+        public IActionResult OnGet(int id)
+        {
+            Driver = driverService.GetDrivers(id);
+            if (Driver == null)
+            {
+                return RedirectToPage("./Index");
+            }
+            return Page();
+        }
+        
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            driverService.AddDriver(Driver);
+            driverService.UpdateDriver(Driver);
             return RedirectToPage("GetDrivers");
         }
     }
-
 }
