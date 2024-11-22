@@ -9,6 +9,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
     {
         [BindProperty]
         public Driver Driver { get; set; }
+        public IEnumerable<Driver> Drivers { get; set; }
 
         IDriverService driverService;
 
@@ -19,7 +20,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
         }
         public void OnGet(int id)
         {
-            Driver = driverService.GetDrivers(id);
+            Drivers = driverService.GetDriversById(id);
         }
         public IActionResult OnPost()
         {

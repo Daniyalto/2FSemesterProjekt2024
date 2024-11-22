@@ -14,7 +14,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
         {
             driverService = service;
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(Driver driver)
         {
             if (!ModelState.IsValid)
             {
@@ -24,5 +24,4 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
             return RedirectToPage("GetDrivers");
         }
     }
-
 }
