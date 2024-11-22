@@ -8,17 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Booking\**" />
+    <Compile Remove="Pages\Driver\**" />
+    <Compile Remove="Pages\Passenger\**" />
+    <Content Remove="Pages\Booking\**" />
+    <Content Remove="Pages\Driver\**" />
+    <Content Remove="Pages\Passenger\**" />
+    <EmbeddedResource Remove="Pages\Booking\**" />
+    <EmbeddedResource Remove="Pages\Driver\**" />
+    <EmbeddedResource Remove="Pages\Passenger\**" />
+    <None Remove="Pages\Booking\**" />
+    <None Remove="Pages\Driver\**" />
+    <None Remove="Pages\Passenger\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Driver\" />
-    <Folder Include="Pages\Booking\" />
-    <Folder Include="Pages\Passenger\" />
   </ItemGroup>
 
 </Project>
