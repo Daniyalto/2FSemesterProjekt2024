@@ -21,9 +21,9 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
 
         public IActionResult OnGet(int id)
         {
-            if (Passengers == null)
+            if (Passengers != null)
             {
-                return RedirectToPage("./Index");
+                return RedirectToPage("/Index");
             }
             Passengers = passengerService.GetPassengerById(id);
             return Page();

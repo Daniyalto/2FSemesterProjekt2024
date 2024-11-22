@@ -32,10 +32,11 @@
          <td>
             <p>          
             <a asp-page="/Passengers/Delete" asp-route-sid="@item.PassengerId">Delete passenger</a>
+            <a asp-page="/Passengers/Update" asp-route-sid="@item.PassengerId">Edit passenger</a>
             </p>
             </td> 
                 </tr>
             }
         }
 </table>
-}
+
