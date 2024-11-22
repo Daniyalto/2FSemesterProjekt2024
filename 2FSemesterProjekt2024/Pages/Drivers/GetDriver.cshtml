@@ -1,0 +1,46 @@
+﻿@page
+@model _2FSemesterProjekt2024.Pages.Drivers.GetDriverModel
+@{
+    ViewData["Title"] = "GetDrivers";
+}
+    <p>
+        <a asp-page="/Drivers/Create">Create New Driver</a>
+    </p>
+<h3 style="color:red"> List of drivers</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th> Driver Id </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Phone number </th>
+            <th> Password </th>
+            <th> Vehicle Infomation </th>
+            <th> License number </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Drivers)
+            {
+                <tr>
+                    <td>  @item.DriverId </td>
+                    <td>  @item.DriverName  </td>
+                     <td>  @item.Email  </td>
+                      <td>  @item.PhoneNumber  </td>
+                       <td>  @item.Password  </td>
+                        <td>  @item.VehicleInfo  </td>
+                             <td>  @item.LicenseNumber  </td>
+                @*     <td>
+                       <p>
+                           <a asp-page="/Students/Student_Enrollments" asp-route-sid="@item.StudentId">Show Enrollments</a>
+                            <a asp-page="/Courses/GetCourses" asp-route-sid="@item.StudentId">Enroll student</a> |
+                            <a asp-page="/Students/Delete" asp-route-sid="@item.StudentId">Delete student</a>
+                       </p>
+                    </td> *@
+                 </tr>
+            }
+        }
+</table>
