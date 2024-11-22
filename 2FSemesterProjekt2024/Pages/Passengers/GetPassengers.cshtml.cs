@@ -17,6 +17,6 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
           {
               Passengers = passengerService.GetPassengers();
           }
-        }
+        
     }
 }
