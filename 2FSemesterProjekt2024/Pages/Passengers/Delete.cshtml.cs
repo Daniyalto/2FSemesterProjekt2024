@@ -9,6 +9,8 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
     {
         [BindProperty]
         public Passenger Passenger { get; set; }
+        public IEnumerable<Passenger> Passengers { get; set; }
+
 
         IPassengerService passengerService;
 
@@ -19,7 +21,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
         }
         public void OnGet(int id)
         {
-            Passenger = passengerService.GetPassengerById(id);
+            Passengers = passengerService.GetPassengerById(id);
         }
         public IActionResult OnPost()
         {
