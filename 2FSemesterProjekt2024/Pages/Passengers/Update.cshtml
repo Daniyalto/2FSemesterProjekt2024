@@ -1,4 +1,28 @@
 ﻿@page
 @model _2FSemesterProjekt2024.Pages.Passengers.UpdateModel
 @{
+    ViewData["Title"] = "UpdatePassenger";
 }
+<h1>UpdatePassenger</h1>
+
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="@Model.Passenger.PassengerName" class="control-label"></label>
+        <input asp-for="@Model.Passenger.PassengerName" class="form-control" />
+        <span asp-validation-for="@Model.Passenger.PassengerName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Passenger.Email" class="control-label"></label>
+        <input asp-for="@Model.Passenger.Email" class="form-control" />
+        <span asp-validation-for="@Model.Passenger.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Passenger.PhoneNumber" class="control-label"></label>
+        <input asp-for="@Model.Passenger.PhoneNumber" class="form-control" />
+        <span asp-validation-for="@Model.Passenger.PhoneNumber" class="text-danger"></span>
+    </div>
+           <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+</form>
