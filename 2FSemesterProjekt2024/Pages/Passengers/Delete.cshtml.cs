@@ -25,7 +25,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
         {
             passengerService.DeletePassenger(Passenger);
 
-            return RedirectToPage("GetPassengers");
+            return RedirectToPage("GetPassenger");
         }
     }
 }

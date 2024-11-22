@@ -36,7 +36,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
                 return Page();
             }
             passengerService.UpdatePassenger(Passenger);
-            return RedirectToPage("GetDrivers");
+            return RedirectToPage("GetPassenger");
         }
     }
 }
