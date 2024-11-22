@@ -17,13 +17,15 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
         [BindProperty]
         public Driver Driver { get; set; }
 
+        public IEnumerable<Driver> Drivers { get; set; }
+
         public IActionResult OnGet(int id)
         {
-            Driver = driverService.GetDrivers(id);
-            if (Driver == null)
+            if (Drivers == null)
             {
                 return RedirectToPage("./Index");
             }
+            Drivers = driverService.GetDriversById(id);
             return Page();
         }
         
