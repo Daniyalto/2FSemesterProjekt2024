@@ -14,7 +14,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
             {
                 passengerService = service;
             }
-            public IActionResult OnPost()
+            public IActionResult OnPost(Passenger passenger)
             {
                 if (!ModelState.IsValid)
                 {
