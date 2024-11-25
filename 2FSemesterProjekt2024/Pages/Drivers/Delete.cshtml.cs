@@ -1,7 +1,9 @@
 using _2FSemesterProjekt2024.Models;
+using _2FSemesterProjekt2024.Services.EF;
 using _2FSemesterProjekt2024.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography;
 
 namespace _2FSemesterProjekt2024.Pages.Drivers
 {
@@ -9,8 +11,7 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
     {
         [BindProperty]
         public Driver Driver { get; set; }
-        public IEnumerable<Driver> Drivers { get; set; }
-
+       
         IDriverService driverService;
 
         public DeleteModel(IDriverService service)
@@ -18,13 +19,17 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
             this.driverService = service;
             Driver = new Driver();
         }
-        public void OnGet(int id)
+        public void OnGet(int did)
         {
-            Drivers = driverService.GetDriversById(id);
+            Driver = driverService.GetDriverById(did);
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(int did)
         {
-            driverService.DeleteDriver(Driver);
+           Driver toBeDeleted = driverService.GetDriverById(did);
+            if (toBeDeleted != null)
+            {
+                driverService.DeleteDriver(toBeDeleted);
+            }
 
             return RedirectToPage("GetDriver");
         }

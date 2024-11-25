@@ -19,6 +19,11 @@ namespace _2FSemesterProjekt2024.Services.EF
             return _context.Drivers;
         }
 
+        public Driver GetDriverById(int did)
+        {
+            return _context.Drivers.FirstOrDefault(x => x.DriverId == did);
+        }
+
         public void AddDriver(Driver driver)
         {
             _context.Drivers.Add(driver);
@@ -27,19 +32,19 @@ namespace _2FSemesterProjekt2024.Services.EF
 
         public void DeleteDriver(Driver driver)
         {
-            _context.Drivers.Remove(driver);
-            _context.SaveChanges();
+            if (driver != null)
+            {
+                _context.Drivers.Remove(driver);
+                _context.SaveChanges();
+            }
         }
 
-        public IEnumerable<Driver> GetDriversById(int id)
-        {
-            return _context.Drivers.Where(x => x.DriverId == id);
-        }
 
         public void UpdateDriver(Driver driver)
         {
-            _context.Update(driver);
+            _context.Drivers.Update(driver);
             _context.SaveChanges();
         }
+
     }
 }

@@ -1,4 +1,5 @@
 using _2FSemesterProjekt2024.Models;
+using _2FSemesterProjekt2024.Services.EF;
 using _2FSemesterProjekt2024.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,26 +18,39 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
         [BindProperty]
         public Driver Driver { get; set; }
 
-        public IEnumerable<Driver> Drivers { get; set; }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int did)
         {
-            if (Drivers == null)
+           Driver = driverService.GetDriverById(did);
+            if (Driver == null)
             {
-                return RedirectToPage("./Index");
+                return RedirectToPage("/Index");
             }
-            Drivers = driverService.GetDriversById(id);
+           
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int did)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            driverService.UpdateDriver(Driver);
-            return RedirectToPage("GetDriver");
+
+            var toBeUpdated = driverService.GetDriverById(did);
+            if (toBeUpdated != null)
+            {
+                toBeUpdated.DriverName = Driver.DriverName;
+                toBeUpdated.Email = Driver.Email;
+                toBeUpdated.PhoneNumber = Driver.PhoneNumber;
+                toBeUpdated.Password = Driver.Password;
+                toBeUpdated.VehicleInfo = Driver.VehicleInfo;
+                toBeUpdated.LicenseNumber = Driver.LicenseNumber;
+
+                driverService.UpdateDriver(toBeUpdated);
+                return RedirectToPage("GetDriver");
+            }
+            return NotFound();
         }
     }
 }

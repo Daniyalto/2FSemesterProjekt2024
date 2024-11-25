@@ -6,7 +6,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
     {
         public IEnumerable<Driver> GetDrivers();
 
-         public IEnumerable<Driver> GetDriversById(int id);
+         public Driver GetDriverById(int did);
 
         public void AddDriver(Driver driver);
 
