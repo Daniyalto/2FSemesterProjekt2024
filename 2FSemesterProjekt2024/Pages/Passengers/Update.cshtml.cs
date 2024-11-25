@@ -25,7 +25,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
             {
                 return RedirectToPage("/Index");
             }
-            Passenger = passengerService.GetPassengerById(pid);
+            
             return Page();
         }
 
