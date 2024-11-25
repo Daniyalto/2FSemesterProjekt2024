@@ -9,7 +9,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
     {
         [BindProperty]
         public Passenger Passenger { get; set; }
-        public IEnumerable<Passenger> Passengers { get; set; }
+       
 
 
         IPassengerService passengerService;
@@ -19,13 +19,13 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
             this.passengerService = service;
             Passenger = new Passenger();
         }
-        public void OnGet(int id)
+        public void OnGet(int pid)
         {
-            Passengers = passengerService.GetPassengerById(id);
+            Passenger = passengerService.GetPassengerById(pid);
         }
-        public IActionResult OnPost()
+        public IActionResult OnPost(int pid)
         {
-            passengerService.DeletePassenger(Passengers);
+            passengerService.DeletePassenger(Passenger);
 
             return RedirectToPage("GetPassenger");
         }

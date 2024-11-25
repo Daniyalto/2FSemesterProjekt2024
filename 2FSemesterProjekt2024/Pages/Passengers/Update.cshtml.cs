@@ -17,15 +17,15 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
         [BindProperty]
         public Passenger Passenger { get; set; }
 
-        public IEnumerable<Passenger> Passengers { get; set; }
+        //public IEnumerable<Passenger> Passengers { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            if (Passengers != null)
+            if (Passenger != null)
             {
                 return RedirectToPage("/Index");
             }
-            Passengers = passengerService.GetPassengerById(id);
+            Passenger = passengerService.GetPassengerById(id);
             return Page();
         }
 

@@ -18,9 +18,9 @@ namespace _2FSemesterProjekt2024.Services.EF
             return _context.Passengers;
         }
 
-        public IEnumerable<Passenger> GetPassengerById(int id)
+        public Passenger GetPassengerById(int id)
         {
-            return _context.Passengers.Where(x => x.PassengerId == id);
+            return _context.Passengers.FirstOrDefault(x => x.PassengerId == id);
         }
 
         //public Passenger GetPassengerbyId(int id)
