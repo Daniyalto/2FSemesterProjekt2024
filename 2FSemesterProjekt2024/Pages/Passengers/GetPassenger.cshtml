@@ -1,0 +1,42 @@
+﻿@page
+@model _2FSemesterProjekt2024.Pages.Passengers.GetPassengersModel
+@{
+    ViewData["Title"] = "GetPassenger";
+}
+<p>
+    <a asp-page="/Passengers/Create">Create New Passenger</a>
+</p>
+<h3 style="color:red"> List of Passengers</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th> Passenger Id </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Phone number </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Passengers)
+            {
+                <tr>
+                    <td>  @item.PassengerId </td>
+                    <td>  @item.PassengerName  </td>
+                    <td>  @item.Email  </td>
+                    <td>  @item.PhoneNumber  </td>
+
+         <td>
+            <p>          
+            <a asp-page="/Passengers/Delete" asp-route-pid="@item.PassengerId">Delete passenger</a>
+            <a asp-page="/Passengers/Update" asp-route-pid="@item.PassengerId">Edit passenger</a>
+            </p>
+            </td> 
+                </tr>
+            }
+        }
+</table>
+

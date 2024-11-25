@@ -1,0 +1,45 @@
+﻿@page 
+@model _2FSemesterProjekt2024.Pages.Passengers.UpdateModel
+@{
+    ViewData["Title"] = "Update Passenger";
+}
+
+<h1>Update Passenger</h1>
+
+<form method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="Passenger.PassengerId" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Passenger.PassengerName" class="control-label"></label>
+        <input asp-for="Passenger.PassengerName" class="form-control" />
+        <span asp-validation-for="Passenger.PassengerName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Passenger.Email" class="control-label"></label>
+        <input asp-for="Passenger.Email" class="form-control" />
+        <span asp-validation-for="Passenger.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Passenger.PhoneNumber" class="control-label"></label>
+        <input asp-for="Passenger.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Passenger.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Passenger.Password" class="control-label"></label>
+        <input asp-for="Passenger.Password" class="form-control" />
+        <span asp-validation-for="Passenger.Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="GetPassenger">Back to List</a>
+</div>
