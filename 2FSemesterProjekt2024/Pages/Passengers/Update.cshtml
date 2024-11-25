@@ -1,4 +1,4 @@
-﻿@page "{pid:int}"
+﻿@page 
 @model _2FSemesterProjekt2024.Pages.Passengers.UpdateModel
 @{
     ViewData["Title"] = "Update Passenger";
@@ -43,7 +43,3 @@
 <div>
     <a asp-page="GetPassenger">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
