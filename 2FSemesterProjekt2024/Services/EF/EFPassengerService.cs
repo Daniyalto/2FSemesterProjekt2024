@@ -18,16 +18,16 @@ namespace _2FSemesterProjekt2024.Services.EF
             return _context.Passengers;
         }
 
-        //public IEnumerable<Passenger> GetPassengerById(int id)
-        //{
-        //    return _context.Passengers.Where(x => x.PassengerId == id);
-        //}
-
-        public Passenger GetPassengerbyId(int id)
+        public IEnumerable<Passenger> GetPassengerById(int id)
         {
-
-            return context.Passengers.Find(id);
+            return _context.Passengers.Where(x => x.PassengerId == id);
         }
+
+        //public Passenger GetPassengerbyId(int id)
+        //{
+
+        //    return context.Passengers.Find(id);
+        //}
 
         public void AddPassenger(Passenger passenger)
         {
