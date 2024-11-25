@@ -45,7 +45,7 @@ namespace _2FSemesterProjekt2024.Services.EF
 
         public void UpdatePassenger(Passenger passenger)
         {
-            _context.Update(passenger);
+            _context.Passengers.Update(passenger);
             _context.SaveChanges();
         }
     }

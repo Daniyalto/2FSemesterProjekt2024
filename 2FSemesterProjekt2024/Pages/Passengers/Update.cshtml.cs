@@ -2,6 +2,7 @@ using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2FSemesterProjekt2024.Pages.Passengers
 {
@@ -19,7 +20,8 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
 
         public IActionResult OnGet(int pid)
         {
-            if (Passenger != null)
+            Passenger = passengerService.GetPassengerById(pid);
+            if (Passenger == null)
             {
                 return RedirectToPage("/Index");
             }
@@ -33,8 +35,19 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
             {
                 return Page();
             }
-            passengerService.UpdatePassenger(Passenger);
-            return RedirectToPage("GetPassenger");
+
+            var toBeUpdated = passengerService.GetPassengerById(pid);
+            if (toBeUpdated != null)
+            {
+                toBeUpdated.PassengerName = Passenger.PassengerName;
+                toBeUpdated.Email = Passenger.Email;
+                toBeUpdated.PhoneNumber = Passenger.PhoneNumber;
+                toBeUpdated.Password = Passenger.Password;
+
+                passengerService.UpdatePassenger(toBeUpdated);
+                return RedirectToPage("GetPassenger");
+            }
+            return NotFound();
         }
     }
 }
