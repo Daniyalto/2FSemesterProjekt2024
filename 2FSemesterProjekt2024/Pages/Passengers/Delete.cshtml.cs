@@ -25,7 +25,11 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
         }
         public IActionResult OnPost(int pid)
         {
-            passengerService.DeletePassenger(Passenger);
+            Passenger toBeDeleted = passengerService.GetPassengerById(pid);
+            if (toBeDeleted != null)
+            {
+                passengerService.DeletePassenger(toBeDeleted);
+            }
 
             return RedirectToPage("GetPassenger");
         }

@@ -18,9 +18,9 @@ namespace _2FSemesterProjekt2024.Services.EF
             return _context.Passengers;
         }
 
-        public Passenger GetPassengerById(int id)
+        public Passenger GetPassengerById(int pid)
         {
-            return _context.Passengers.FirstOrDefault(x => x.PassengerId == id);
+            return _context.Passengers.FirstOrDefault(x => x.PassengerId == pid);
         }
 
         //public Passenger GetPassengerbyId(int id)
@@ -39,7 +39,7 @@ namespace _2FSemesterProjekt2024.Services.EF
             if (passenger != null)
             {
                 _context.Passengers.Remove(passenger);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
 
