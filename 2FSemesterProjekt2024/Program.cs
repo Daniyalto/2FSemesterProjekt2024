@@ -19,6 +19,14 @@ namespace _2FSemesterProjekt2024
             builder.Services.AddTransient<IDriverService, EFDriverService>();
             builder.Services.AddTransient<IPassengerService, EFPassengerService>();
 
+            builder.Services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", options =>
+                {
+                    options.LoginPath = "/Login";
+                });
+            builder.Services.AddScoped<IAuthService, EFAuthService>();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -33,7 +41,8 @@ namespace _2FSemesterProjekt2024
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();

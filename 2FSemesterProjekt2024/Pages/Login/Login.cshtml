@@ -1,0 +1,17 @@
+﻿@page
+@model _2FSemesterProjekt2024.Pages.Login.LoginModel
+@{
+}
+<form method="post">
+    <div>
+        <label asp-for="LoginData.Email"></label>
+        <input asp-for="LoginData.Email" />
+        <span asp-validation-for="LoginData.Email"></span>
+    </div>
+    <div>
+        <label asp-for="LoginData.Password"></label>
+        <input asp-for="LoginData.Password" type="password" />
+        <span asp-validation-for="LoginData.Password"></span>
+    </div>
+    <button type="submit">Login</button>
+</form>
