@@ -37,7 +37,7 @@ public class LoginModel : PageModel
             return Page();
         }
 
-        if (await _authService.ValidateCredentials(LoginData.Email, LoginData.Password, out string userType, out int userId))
+        if (_authService.ValidateCredentials(LoginData.Email, LoginData.Password, out string userType, out int userId))
         {
             var claims = new List<Claim>
             {

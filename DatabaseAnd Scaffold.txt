@@ -1,25 +1,49 @@
-CREATE TABLE Drivers (
-    DriverID INT NOT NULL PRIMARY KEY,
-    Name VARCHAR(30) NOT NULL,
-    Address VARCHAR(50) NOT NULL
+DROP TABLE IF EXISTS [dbo].[Booking];
+DROP TABLE IF EXISTS [dbo].[Driver];
+DROP TABLE IF EXISTS [dbo].[Passenger];
+
+-- Create Passenger table
+CREATE TABLE [dbo].[Passenger] (
+    [PassengerId]   INT        IDENTITY (1, 1) NOT NULL,
+    [PassengerName] NCHAR (30) NOT NULL,
+    [Email]         NCHAR (40) NOT NULL,
+    [PhoneNumber]   NCHAR (20) NOT NULL,
+    [Password]      NCHAR (20) NOT NULL,
+    PRIMARY KEY CLUSTERED ([PassengerId] ASC)
 );
 
-CREATE TABLE Passenger (
-    PassengerID INT NOT NULL PRIMARY KEY,
-    Name VARCHAR(30) NOT NULL,
-    Email VARCHAR(50) NOT NULL
+-- Create Driver table
+CREATE TABLE [dbo].[Driver] (
+    [DriverId]      INT            IDENTITY (1, 1) NOT NULL,
+    [DriverName]    NCHAR (30)     NOT NULL,
+    [Email]         NCHAR (30)     NOT NULL,
+    [PhoneNumber]   NCHAR (20)     NOT NULL,
+    [Password]      NCHAR (20)     NOT NULL,
+    [VehicleInfo]   NCHAR (200)    NOT NULL,
+    [LicenseNumber] NCHAR (10)     NOT NULL,
+    [Rating]        DECIMAL (2, 1) NOT NULL,
+    [Points]        INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([DriverId] ASC),
+    CHECK ([Rating]>=(1.0) AND [Rating]<=(5.0)),
+    CHECK ([Points]>=(0))
 );
 
-CREATE TABLE PickupLocations (
-    PickupID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    DriverID INT NULL,
-    PassengerID INT NULL,
-    Location VARCHAR(255) NOT NULL,
-    Time DATETIME NOT NULL,
-    SeatsAvailable INT NOT NULL,
-    FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID),
-    FOREIGN KEY (PassengerID) REFERENCES Passenger(PassengerID)
+-- Create Booking table
+CREATE TABLE [dbo].[Booking] (
+    [BookingId]       INT            IDENTITY (1, 1) NOT NULL,
+    [DriverId]        INT            NULL,
+    [PassengerId]     INT            NULL,
+    [PickupLocation]  NVARCHAR (200) NOT NULL,
+    [DropoffLocation] NVARCHAR (200) NOT NULL,
+    [BookingTime]     DATETIME       DEFAULT (getdate()) NOT NULL,
+    PRIMARY KEY CLUSTERED ([BookingId] ASC),
+    FOREIGN KEY ([PassengerId]) REFERENCES [dbo].[Passenger] ([PassengerId]),
+    FOREIGN KEY ([DriverId]) REFERENCES [dbo].[Driver] ([DriverId])
 );
+
+INSERT INTO Driver VALUES ('Lasse', 'egebolasse@mail.com', '12345678', '1234', 'blå', 'ab12345', 5, 100);
+INSERT INTO Passenger VALUES ('Mikkel', 'Miksen@mail.com', '87654321', '4321');
+INSERT INTO Booking VALUES (1, 1, 'Roskilde', 'Roskilde', '2024-11-18 14:30:15');
 
 
 -----------------------Scafold--------------------------
