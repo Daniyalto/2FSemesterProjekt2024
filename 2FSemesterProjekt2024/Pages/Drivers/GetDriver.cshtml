@@ -14,7 +14,7 @@
             <th> Name </th>
             <th> Email </th>
             <th> Phone number </th>
-            <th> Password </th>
+           @*  <th> Password </th> *@
             <th> Vehicle Infomation </th>
             <th> License number </th>
         </tr>
@@ -30,9 +30,9 @@
                     <td>  @item.DriverName  </td>
                      <td>  @item.Email  </td>
                       <td>  @item.PhoneNumber  </td>
-                       <td>  @item.Password  </td>
-                        <td>  @item.VehicleInfo  </td>
-                             <td>  @item.LicenseNumber  </td>
+                       @* <td>  @item.Password  </td> *@
+                      <td>  @item.VehicleInfo  </td>
+                            <td>  @item.LicenseNumber  </td>
                      <td>
                        <p>
                            <a asp-page="/Drivers/Delete" asp-route-did="@item.DriverId">Delete driver</a>
