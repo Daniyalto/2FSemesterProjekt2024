@@ -12,9 +12,9 @@ public partial class Booking
     [Key]
     public int BookingId { get; set; }
 
-    public int? DriverId { get; set; }
+    public int DriverId { get; set; }
 
-    public int? PassengerId { get; set; }
+    public int PassengerId { get; set; }
 
     [StringLength(200)]
     public string PickupLocation { get; set; } = null!;
@@ -27,9 +27,9 @@ public partial class Booking
 
     [ForeignKey("DriverId")]
     [InverseProperty("Bookings")]
-    public virtual Driver? Driver { get; set; }
+    public virtual Driver Driver { get; set; } = null!;
 
     [ForeignKey("PassengerId")]
     [InverseProperty("Bookings")]
-    public virtual Passenger? Passenger { get; set; }
+    public virtual Passenger Passenger { get; set; } = null!;
 }
