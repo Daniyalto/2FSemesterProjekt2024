@@ -1,38 +1,56 @@
-DROP TABLE IF EXISTS [dbo].[Booking];
-DROP TABLE IF EXISTS [dbo].[Driver];
-DROP TABLE IF EXISTS [dbo].[Passenger];
+-- Drop tables if they already exist
+IF OBJECT_ID('dbo.Booking', 'U') IS NOT NULL DROP TABLE [dbo].[Booking];
+IF OBJECT_ID('dbo.Driver', 'U') IS NOT NULL DROP TABLE [dbo].[Driver];
+IF OBJECT_ID('dbo.Passenger', 'U') IS NOT NULL DROP TABLE [dbo].[Passenger];
+IF OBJECT_ID('dbo.Roles', 'U') IS NOT NULL DROP TABLE [dbo].[Roles];
+IF OBJECT_ID('dbo.LoginData', 'U') IS NOT NULL DROP TABLE [dbo].[LoginData];
+
+-- Create Roles table
+CREATE TABLE [dbo].[Roles] (
+    [RoleId] INT IDENTITY(1,1) PRIMARY KEY,
+    [RoleName] NVARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Insert Roles
+INSERT INTO [dbo].[Roles] (RoleName) VALUES ('Driver');
+INSERT INTO [dbo].[Roles] (RoleName) VALUES ('Passenger');
 
 -- Create Passenger table
 CREATE TABLE [dbo].[Passenger] (
     [PassengerId]   INT        IDENTITY (1, 1) NOT NULL,
-    [PassengerName] NCHAR (30) NOT NULL,
-    [Email]         NCHAR (40) NOT NULL,
-    [PhoneNumber]   NCHAR (20) NOT NULL,
-    [Password]      NCHAR (20) NOT NULL,
-    PRIMARY KEY CLUSTERED ([PassengerId] ASC)
+    [PassengerName] NVARCHAR (30) NOT NULL,
+    [Email]         NVARCHAR (256) NOT NULL UNIQUE,  -- Changed NCHAR to NVARCHAR(256) for Email
+    [PhoneNumber]   NVARCHAR (20) NOT NULL,
+    [Password]      NVARCHAR (256) NOT NULL,         -- Use hashed password (NVARCHAR for variable length)
+    -- Adding RoleId to link the passenger to a role
+    [RoleId]        INT         NOT NULL,
+    PRIMARY KEY CLUSTERED ([PassengerId] ASC),
+    FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([RoleId])  -- Link RoleId to Roles table
 );
 
 -- Create Driver table
 CREATE TABLE [dbo].[Driver] (
     [DriverId]      INT            IDENTITY (1, 1) NOT NULL,
-    [DriverName]    NCHAR (30)     NOT NULL,
-    [Email]         NCHAR (30)     NOT NULL,
-    [PhoneNumber]   NCHAR (20)     NOT NULL,
-    [Password]      NCHAR (20)     NOT NULL,
-    [VehicleInfo]   NCHAR (200)    NOT NULL,
-    [LicenseNumber] NCHAR (10)     NOT NULL,
-    [Rating]        DECIMAL (2, 1) NOT NULL,
-    [Points]        INT            NOT NULL,
+    [DriverName]    NVARCHAR (30)     NOT NULL,
+    [Email]         NVARCHAR (256)    NOT NULL UNIQUE,  -- Changed NCHAR to NVARCHAR(256) for Email
+    [PhoneNumber]   NVARCHAR (20)     NOT NULL,
+    [Password]      NVARCHAR (256)    NOT NULL,         -- Use hashed password (NVARCHAR for variable length)
+    [VehicleInfo]   NVARCHAR (200)    NOT NULL,
+    [LicenseNumber] NVARCHAR (20)     NOT NULL,         -- LicenseNumber might be longer than 10 chars
+    [Rating]        DECIMAL (2, 1)    NOT NULL,
+    [Points]        INT               NOT NULL CHECK ([Points] >= 0),
+    -- Adding RoleId to link the driver to a role
+    [RoleId]        INT               NOT NULL,
     PRIMARY KEY CLUSTERED ([DriverId] ASC),
-    CHECK ([Rating]>=(1.0) AND [Rating]<=(5.0)),
-    CHECK ([Points]>=(0))
+    CHECK ([Rating] >= 1.0 AND [Rating] <= 5.0),  -- Rating constraint
+    FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([RoleId])  -- Link RoleId to Roles table
 );
 
 -- Create Booking table
 CREATE TABLE [dbo].[Booking] (
     [BookingId]       INT            IDENTITY (1, 1) NOT NULL,
-    [DriverId]        INT            NULL,
-    [PassengerId]     INT            NULL,
+    [DriverId]        INT            NOT NULL,   -- Changed to NOT NULL, assuming every booking has a driver
+    [PassengerId]     INT            NOT NULL,   -- Changed to NOT NULL, assuming every booking has a passenger
     [PickupLocation]  NVARCHAR (200) NOT NULL,
     [DropoffLocation] NVARCHAR (200) NOT NULL,
     [BookingTime]     DATETIME       DEFAULT (getdate()) NOT NULL,
@@ -41,10 +59,26 @@ CREATE TABLE [dbo].[Booking] (
     FOREIGN KEY ([DriverId]) REFERENCES [dbo].[Driver] ([DriverId])
 );
 
-INSERT INTO Driver VALUES ('Lasse', 'egebolasse@mail.com', '12345678', '1234', 'blå', 'ab12345', 5, 100);
-INSERT INTO Passenger VALUES ('Mikkel', 'Miksen@mail.com', '87654321', '4321');
-INSERT INTO Booking VALUES (1, 1, 'Roskilde', 'Roskilde', '2024-11-18 14:30:15');
+-- Create LoginData table
+CREATE TABLE [dbo].[LoginData] (
+    [UserId]   INT PRIMARY KEY IDENTITY(1,1),  -- Unique identifier for each user
+    [Email]    NVARCHAR(256) NOT NULL UNIQUE,    -- Email column, must be unique
+    [Password] NVARCHAR(256) NOT NULL,            -- Password column (store hashed password)
+    CONSTRAINT [CK_Email] CHECK (Email LIKE '%@%') -- Check for basic email format
+);
 
+-- Insert Driver with RoleId for Driver (RoleId = 1 for 'Driver')
+INSERT INTO [dbo].[Driver] ([DriverName], [Email], [PhoneNumber], [Password], [VehicleInfo], [LicenseNumber], [Rating], [Points], [RoleId])
+VALUES ('Lasse', 'egebolasse@mail.com', '12345678', '1234', 'blå', 'ab12345', 5, 100, 1);  -- RoleId 1 for 'Driver'
+
+-- Insert Passenger with RoleId for Passenger (RoleId = 2 for 'Passenger')
+INSERT INTO [dbo].[Passenger] ([PassengerName], [Email], [PhoneNumber], [Password], [RoleId])
+VALUES ('Mikkel', 'Miksen@mail.com', '87654321', '4321', 2);  -- RoleId 2 for 'Passenger'
+
+-- Insert Booking (assuming DriverId = 1, PassengerId = 1)
+-- Make sure both DriverId and PassengerId exist, otherwise you'll get a foreign key violation
+INSERT INTO [dbo].[Booking] ([DriverId], [PassengerId], [PickupLocation], [DropoffLocation], [BookingTime])
+VALUES (1, 1, 'Roskilde', 'Roskilde', '2024-11-18 14:30:15');
 
 -----------------------Scafold--------------------------
 Scaffold-DbContext "Data Source=mssql3.unoeuro.com;Initial Catalog=jbased_dk_db_driver_db;User ID=jbased_dk;Password=RnbHpmGhykF5cr92xAda;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir  Models -ContextDir Models  -Context TransportDBContext -DataAnnotations
