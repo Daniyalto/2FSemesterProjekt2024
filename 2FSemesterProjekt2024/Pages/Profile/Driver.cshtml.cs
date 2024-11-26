@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 
 [Authorize(Roles = "Driver")]
-public class DriverProfileModel : PageModel
+public class DriverModel : PageModel
 {
     private readonly IDriverService _driverService;
 
-    public DriverProfileModel(IDriverService driverService)
+    public DriverModel(IDriverService driverService)
     {
         _driverService = driverService;
     }

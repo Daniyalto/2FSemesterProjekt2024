@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using _2FSemesterProjekt2024.Services.EF;
 
 [Authorize(Roles = "Passenger")]
-public class PassengerProfileModel : PageModel
+public class PassengerModel : PageModel
 {
     private readonly IPassengerService _passengerService;
 
-    public PassengerProfileModel(IPassengerService passengerService)
+    public PassengerModel(IPassengerService passengerService)
     {
         _passengerService = passengerService;
     }
