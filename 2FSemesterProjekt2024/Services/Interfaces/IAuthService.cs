@@ -3,7 +3,7 @@ namespace _2FSemesterProjekt2024.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<bool> ValidateCredentials(string email, string password, out string userType, out int userId);
+        public bool ValidateCredentials(string email, string password, out string userType, out int userId);
     }
 
 }

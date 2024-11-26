@@ -12,9 +12,8 @@ namespace _2FSemesterProjekt2024.Services.EF
             _context = context;
         }
 
-        public async Task<bool> ValidateCredentials(string email, string password, out string userType, out int userId)
-        {
-            var driver = await _context.Drivers.FirstOrDefaultAsync(d => d.Email == email && d.Password == password);
+        public bool ValidateCredentials(string email, string password, out string userType, out int userId) {
+            var driver = _context.Drivers.FirstOrDefault(d => d.Email == email && d.Password == password);
             if (driver != null)
             {
                 userType = "Driver";
@@ -22,7 +21,7 @@ namespace _2FSemesterProjekt2024.Services.EF
                 return true;
             }
 
-            var passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.Email == email && p.Password == password);
+            var passenger = _context.Passengers.FirstOrDefault(p => p.Email == email && p.Password == password);
             if (passenger != null)
             {
                 userType = "Passenger";
