@@ -23,5 +23,5 @@ namespace _2FSemesterProjekt2024.Pages.Bookings
             bookingService.AddBooking(Booking);
             return RedirectToPage("GetDriver");
         }
-    }
+    }   
 }
