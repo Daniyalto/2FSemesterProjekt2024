@@ -45,7 +45,7 @@ namespace _2FSemesterProjekt2024.Pages.Passengers
                 toBeUpdated.Password = Passenger.Password;
 
                 passengerService.UpdatePassenger(toBeUpdated);
-                return RedirectToPage("GetPassenger");
+                return RedirectToPage("Profile");
             }
             return NotFound();
         }

@@ -24,6 +24,9 @@ public partial class Passenger
     [StringLength(20)]
     public string Password { get; set; } = null!;
 
+    [StringLength(100)]
+    public string? ProfilePictureUrl { get; set; }
+
     [InverseProperty("Passenger")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }
