@@ -1,4 +1,36 @@
 ﻿@page
 @model _2FSemesterProjekt2024.Pages.Bookings.GetbookingModel
 @{
+    ViewData["Title"] = "GetBooking";
 }
+<p>
+    <a asp-page="/Bookings/Create">Create New Booking</a>
+</p>
+<h3 style="color:red"> List of bookings</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th> PickupLocation </th>
+            <th> DropoffLocation </th>
+            <th> BookingTime </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                    <td>  @item.PickupLocation </td>
+                    <td>  @item.DroppffLocation  </td>
+                    <td>  @item.BookingTime  </td>
+                        <p>
+
+                            <a asp-page="/Bookings" asp-route-did="@item.BookingId">View profile</a>|
+
+                        </p>
+                </tr>
+            }
+        }
+</table>
