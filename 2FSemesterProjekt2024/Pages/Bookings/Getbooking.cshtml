@@ -1,5 +1,5 @@
 ﻿@page
-@model _2FSemesterProjekt2024.Pages.Bookings.GetbookingModel
+@model _2FSemesterProjekt2024.Pages.Bookings.GetBookingModel
 @{
     ViewData["Title"] = "GetBooking";
 }
@@ -23,13 +23,13 @@
             {
                 <tr>
                     <td>  @item.PickupLocation </td>
-                    <td>  @item.DroppffLocation  </td>
+                    <td>  @item.DropoffLocation  </td>
                     <td>  @item.BookingTime  </td>
-                        <p>
+@*                         <p>
 
                             <a asp-page="/Bookings" asp-route-did="@item.BookingId">View profile</a>|
 
-                        </p>
+                        </p> *@
                 </tr>
             }
         }
