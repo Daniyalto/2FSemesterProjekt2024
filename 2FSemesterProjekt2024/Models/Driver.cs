@@ -35,6 +35,9 @@ public partial class Driver
 
     public int Points { get; set; }
 
+    [StringLength(100)]
+    public string? ProfilePictureUrl { get; set; }
+
     [InverseProperty("Driver")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }
