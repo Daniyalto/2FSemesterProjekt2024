@@ -1,0 +1,25 @@
+﻿@page
+@model _2FSemesterProjekt2024.Pages.Drivers.ProfileModel
+@{
+    ViewData["Title"] = " Driver profile";
+}
+
+<h1>Driver Profile</h1>
+
+<div class="driver-profile">
+    <div class="profile-picture">
+        <img src="@Model.Driver.ProfilePictureUrl" alt="Profile Picture" />
+    </div>
+    <div class="driver-details">
+        <h2>@Model.Driver.DriverName</h2>
+        <p><strong>Email:</strong> @Model.Driver.Email</p>
+        <p><strong>Phone Number:</strong> @Model.Driver.PhoneNumber</p>
+        <p><strong>Vehicle Info:</strong> @Model.Driver.VehicleInfo</p>
+        <p><strong>License Number:</strong> @Model.Driver.LicenseNumber</p>
+        <p><strong>Points:</strong> @Model.Driver.Points</p>
+        <p><strong>Rating:</strong> @Model.Driver.Rating</p>
+    </div>
+</div>
+
+<a class="btn btn-primary" asp-page="./Update" asp-route-did="@Model.Driver.DriverId">Edit Profile</a>
+<a class="btn btn-primary" asp-page="./Delete" asp-route-did="@Model.Driver.DriverId">Delete Profile</a>

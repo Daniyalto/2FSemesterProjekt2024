@@ -1,0 +1,26 @@
+CREATE TABLE Drivers (
+    DriverID INT NOT NULL PRIMARY KEY,
+    Name VARCHAR(30) NOT NULL,
+    Address VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Passenger (
+    PassengerID INT NOT NULL PRIMARY KEY,
+    Name VARCHAR(30) NOT NULL,
+    Email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE PickupLocations (
+    PickupID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    DriverID INT NULL,
+    PassengerID INT NULL,
+    Location VARCHAR(255) NOT NULL,
+    Time DATETIME NOT NULL,
+    SeatsAvailable INT NOT NULL,
+    FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID),
+    FOREIGN KEY (PassengerID) REFERENCES Passenger(PassengerID)
+);
+
+
+-----------------------Scafold--------------------------
+Scaffold-DbContext "Data Source=mssql3.unoeuro.com;Initial Catalog=jbased_dk_db_driver_db;User ID=jbased_dk;Password=RnbHpmGhykF5cr92xAda;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir  Models -ContextDir Models  -Context TransportDBContext -DataAnnotations
