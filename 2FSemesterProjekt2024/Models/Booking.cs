@@ -24,6 +24,8 @@ public partial class Booking
 
     [Column(TypeName = "datetime")]
     public DateTime BookingTime { get; set; }
+    
+    public int Seats {  get; set; }
 
     [ForeignKey("DriverId")]
     [InverseProperty("Bookings")]

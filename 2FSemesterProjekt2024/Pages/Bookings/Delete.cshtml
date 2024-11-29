@@ -46,6 +46,12 @@
                 @Html.DisplayFor(model => model.Booking.BookingTime)
             </dd>
             <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Booking.Seats)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Booking.Seats)
+            </dd>
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Booking.Driver.DriverName) @* if these lines dont wrok, delete them *@
             </dt>
             <dd class="col-sm-10">
