@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "GetBooking";
 }
-<p>
-    <a asp-page="/Bookings/Create">Create New Booking</a>
-</p>
+
 <h3 style="color:red"> List of bookings</h3>
+<p>
+<a asp-page="/Drivers/Profile" asp-route-did="DriverId">Profile</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -27,12 +28,26 @@
                     <td>  @item.DropoffLocation  </td>
                     <td>  @item.BookingTime  </td>
                     <td>  @item.Seats  </td>
-@*                         <p>
+                      
+                    <td>
+                       <p>
 
-                            <a asp-page="/Bookings" asp-route-did="@item.BookingId">View profile</a>|
-
-                        </p> *@
+                            <a asp-page="/Bookings/Delete" asp-route-bid="@item.BookingId">Delete</a>|
+                            <a asp-page="./Update" asp-route-bid="@item.BookingId">Edit</a>|
+                            
+                           
+                       </p>
+                    </td>
                 </tr>
             }
         }
+        
 </table>
+
+        <p>
+            <a asp-page="/Bookings/Create">Create New Booking</a>
+        </p>
+
+        <p>
+            <a asp-page="/Bookings/Create">Available passengers</a>
+        </p>
