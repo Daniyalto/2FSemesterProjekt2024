@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Bookings\BookingDriver\" />
     <Folder Include="Pages\Bookings\BookingPassenger\" />
   </ItemGroup>
 
