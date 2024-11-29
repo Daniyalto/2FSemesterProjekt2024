@@ -15,9 +15,17 @@ namespace _2FSemesterProjekt2024
             builder.Services.AddRazorPages();
             builder.Services.AddDbContext<DriverDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
             builder.Services.AddTransient<IBookingService, EFBookingService>();
             builder.Services.AddTransient<IDriverService, EFDriverService>();
             builder.Services.AddTransient<IPassengerService, EFPassengerService>();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1); // Set session timeout (e.g., 1 hour)
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             var app = builder.Build();
 
@@ -31,7 +39,7 @@ namespace _2FSemesterProjekt2024
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

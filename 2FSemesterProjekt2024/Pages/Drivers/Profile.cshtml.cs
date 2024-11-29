@@ -21,16 +21,32 @@ namespace _2FSemesterProjekt2024.Pages.Drivers
 
         public IActionResult OnGet(int did)
         {
-            
-            Driver = _driverService.GetDriverById(did);
+            // Retrieve session values
+            string userType = HttpContext.Session.GetString("UserType");
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            if (Driver == null)
+            if (userType == "Driver" && userId.HasValue)
             {
-                
-                return NotFound();
+                Driver = _driverService.GetDriverById(userId.Value);
+                if (Driver == null)
+                {
+                    return NotFound();
+                }
+                return Page();
             }
 
-            return Page();
+            // If no session, redirect to login
+            return RedirectToPage("/Auth/Login");
+            /* Driver = _driverService.GetDriverById(did);
+
+             if (Driver == null)
+             {
+
+                 return NotFound();
+             }
+
+             return Page();
+            */
         }
     }
 }
