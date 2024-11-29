@@ -22,6 +22,8 @@ public partial class Booking
     [StringLength(200)]
     public string DropoffLocation { get; set; } = null!;
 
+    public int Seats { get; set; }
+
     [Column(TypeName = "datetime")]
     public DateTime BookingTime { get; set; }
 
