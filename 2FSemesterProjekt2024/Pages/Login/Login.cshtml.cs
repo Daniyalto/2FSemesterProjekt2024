@@ -44,23 +44,6 @@ namespace _2FSemesterProjekt2024.Pages.Auth
                 return RedirectToPage("/Profile/Profile");
             }
 
-            /* if (driver != null)
-            {
-                HttpContext.Session.SetString("UserType", "Driver");
-                HttpContext.Session.SetInt32("UserId", driver.DriverId);
-                return RedirectToPage("/Drivers/Profile", new { did = driver.DriverId });
-            }
-
-            // Check if user is a passenger
-            var passenger = _passengerService.GetPassengers()
-                .FirstOrDefault(p => p.Email == Email && p.Password == Password);
-            if (passenger != null)
-            {
-                HttpContext.Session.SetString("UserType", "Passenger");
-                HttpContext.Session.SetInt32("UserId", passenger.PassengerId);
-                return RedirectToPage("/Passengers/Profile", new { pid = passenger.PassengerId });
-            }*/
-
             // Invalid login
             ModelState.AddModelError(string.Empty, "Invalid email or password.");
             return Page();
