@@ -31,7 +31,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookings
             var newBooking = new Booking
             {
                 PassengerId = this.PassengerId
-            }
+            };
             
 
 
