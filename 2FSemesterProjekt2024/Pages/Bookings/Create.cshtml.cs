@@ -28,14 +28,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookings
        
         public IActionResult OnPost(Booking booking)
         {
-            var newBooking = new Booking
-            {
-                PassengerId = this.PassengerId
-            }
-            
-
-
-
+           
             if (!ModelState.IsValid)
             {
                 return Page();
