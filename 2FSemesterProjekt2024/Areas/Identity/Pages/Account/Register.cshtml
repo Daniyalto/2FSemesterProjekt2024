@@ -27,6 +27,18 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            <div class="checkbox mb-3">
+                <label asp-for="Input.Driver" class="form-label">
+                    <input class="form-check-input" asp-for="Input.Driver" />
+                    @Html.DisplayNameFor(m => m.Input.Driver)
+                </label>
+            </div>
+            <div class="checkbox mb-3">
+                 <label asp-for="Input.Passenger" class="form-label">
+                    <input class="form-check-input" asp-for="Input.Passenger" />
+                    @Html.DisplayNameFor(m => m.Input.Passenger)
+                 </label>
+            </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
