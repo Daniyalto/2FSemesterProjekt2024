@@ -1,0 +1,39 @@
+CREATE TABLE [dbo].[Booking] (
+    [BookingId]       INT            IDENTITY (1, 1) NOT NULL,
+    [DriverId]        INT            NULL,
+    [PassengerId]     INT            NULL,
+    [PickupLocation]  NVARCHAR (200) NOT NULL,
+    [DropoffLocation] NVARCHAR (200) NOT NULL,
+    [BookingTime]     DATETIME       DEFAULT (getdate()) NOT NULL,
+    [Seats]           INT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([BookingId] ASC),
+    FOREIGN KEY ([DriverId]) REFERENCES [dbo].[Driver] ([DriverId]) ON UPDATE CASCADE,
+    FOREIGN KEY ([PassengerId]) REFERENCES [dbo].[Passenger] ([PassengerId]) ON UPDATE CASCADE
+);
+
+CREATE TABLE [dbo].[Driver] (
+    [DriverId]          INT            IDENTITY (1, 1) NOT NULL,
+    [DriverName]        NVARCHAR (30)  NOT NULL,
+    [Email]             NVARCHAR (30)  NOT NULL,
+    [PhoneNumber]       NVARCHAR (20)  NOT NULL,
+    [Password]          NVARCHAR (20)  NOT NULL,
+    [VehicleInfo]       NVARCHAR (200) NOT NULL,
+    [LicenseNumber]     NVARCHAR (10)  NOT NULL,
+    [Rating]            DECIMAL (2, 1) NULL,
+    [Points]            INT            NULL,
+    [ProfilePictureUrl] NVARCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([DriverId] ASC),
+    CHECK ([Points]>=(0)),
+    CHECK ([Rating]>=(0) AND [Rating]<=(5.0))
+);
+
+CREATE TABLE [dbo].[Passenger] (
+    [PassengerId]       INT            IDENTITY (1, 1) NOT NULL,
+    [PassengerName]     NVARCHAR (30)  NOT NULL,
+    [Email]             NVARCHAR (50)  NOT NULL,
+    [PhoneNumber]       NVARCHAR (20)  NOT NULL,
+    [Password]          NVARCHAR (30)  NOT NULL,
+    [ProfilePictureUrl] NVARCHAR (100) NULL,
+    PRIMARY KEY CLUSTERED ([PassengerId] ASC)
+);
+
