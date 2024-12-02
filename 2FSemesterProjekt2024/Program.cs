@@ -1,7 +1,9 @@
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services.EF;
 using _2FSemesterProjekt2024.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace _2FSemesterProjekt2024
 {
@@ -13,8 +15,16 @@ namespace _2FSemesterProjekt2024
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<DriverDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            
+            builder.Services.AddDbContext<DriverDBContext>(options =>
+            {
+                var connectionsString = builder.Configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connectionsString).ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+            });
 
+            //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DriverDBContext>();
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DriverDBContext>();
 
             builder.Services.AddTransient<IBookingService, EFBookingService>();
             builder.Services.AddTransient<IDriverService, EFDriverService>();

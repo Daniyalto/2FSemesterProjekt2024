@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace _2FSemesterProjekt2024.Models;
 
-public partial class DriverDBContext : DbContext
+public partial class DriverDBContext : IdentityDbContext<ApplicationUser>
 {
    
 
-    public DriverDBContext(DbContextOptions<DriverDBContext> options)
+    public DriverDBContext(DbContextOptions options)
         : base(options)
     {
     }
@@ -20,22 +22,9 @@ public partial class DriverDBContext : DbContext
     public virtual DbSet<Passenger> Passengers { get; set; }
 
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=mssql3.unoeuro.com;Initial Catalog=jbased_dk_db_driver_db;User ID=jbased_dk;Password=RnbHpmGhykF5cr92xAda;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-
-
-        // Configuration is now handled in Program.cs
-        if (!optionsBuilder.IsConfigured)
-        {
-            // Optional: You may log a warning or throw an exception if configuration is missing.
-            throw new InvalidOperationException("DbContextOptions must be configured.");
-        }
-    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Booking>(entity =>
         {
             entity.HasKey(e => e.BookingId).HasName("PK__tmp_ms_x__73951AED33951DC6");
@@ -68,6 +57,16 @@ public partial class DriverDBContext : DbContext
             entity.Property(e => e.Password).IsFixedLength();
             entity.Property(e => e.PhoneNumber).IsFixedLength();
         });
+        var passenger = new IdentityRole("passenger");
+        passenger.NormalizedName = "passenger";
+
+        var driver = new IdentityRole("driver");
+        driver.NormalizedName = "driver";
+
+        var passengerDriver = new IdentityRole("passengerDriver");
+        passengerDriver.NormalizedName = "passengerDriver";
+
+        modelBuilder.Entity<IdentityRole>().HasData(passenger, driver, passengerDriver);
 
         OnModelCreatingPartial(modelBuilder);
     }
