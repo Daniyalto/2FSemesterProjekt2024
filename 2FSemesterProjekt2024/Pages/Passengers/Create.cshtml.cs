@@ -1,10 +1,12 @@
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _2FSemesterProjekt2024.Pages.Passengers
 {
+    
     public class CreateModel : PageModel
     {
             [BindProperty]
