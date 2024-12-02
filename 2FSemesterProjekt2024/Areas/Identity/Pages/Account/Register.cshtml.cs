@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
 {
@@ -30,21 +31,28 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public List<string> AvailableRoles { get; set; }
+
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
-        {
+             UserManager<ApplicationUser> userManager,
+             IUserStore<ApplicationUser> userStore,
+             SignInManager<ApplicationUser> signInManager,
+             ILogger<RegisterModel> logger,
+             IEmailSender emailSender,
+             RoleManager<IdentityRole> roleManager) // Inject RoleManager
+{
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
+           
         }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -98,14 +106,19 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            // 
+            [Display(Name = "Select Roles")]
+            public List<string> SelectedRoles { get; set; } = new List<string>();
         }
 
 
-        public async Task OnGetAsync(string returnUrl = null)
-        {
+        public async Task OnGetAsync(string returnUrl = null) {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            AvailableRoles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
         }
+
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -122,6 +135,17 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // Assign selected roles
+                    foreach (var role in Input.SelectedRoles)
+                    {
+                        if (await _roleManager.RoleExistsAsync(role))
+
+                        {
+                            await _userManager.AddToRoleAsync(user, role);
+                        }
+                    }
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
