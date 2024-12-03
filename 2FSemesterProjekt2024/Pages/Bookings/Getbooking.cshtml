@@ -5,9 +5,7 @@
 }
 
 <h3 style="color:red"> List of bookings</h3>
-<p>
-    <a asp-page="/Bookings/Create" asp-route-bid="BookingId">Create Booking</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -32,8 +30,12 @@
                     <td>
                        <p>
 
-                            <a asp-page="/Bookings/Delete" asp-route-bid="@item.BookingId">Delete</a>|
-                            <a asp-page="./Update" asp-route-bid="@item.BookingId">Edit</a>|
+
+
+                            <a asp-page="./Update" class="btn btn-primary">Edit</a>
+                            <a asp-page="/Bookings/Delete" class="btn btn-danger">Delete</a>
+                            
+                            
                             
                            
                        </p>
@@ -42,4 +44,6 @@
             }
         }
 </table>
+
+<a asp-page="/Bookings/Create" class="btn btn-primary">Create Booking</a>
 
