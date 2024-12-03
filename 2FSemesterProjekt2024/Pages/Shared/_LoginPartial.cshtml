@@ -15,6 +15,16 @@
             <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
         </form>
     </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Drivers/GetDriver">View Drivers</a>
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Passengers/GetPassenger">View Passengers</a>
+
+        </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Getbooking">Bookings</a>
+        </li>
 }
 else
 {
@@ -24,5 +34,10 @@ else
     <li class="nav-item">
         <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
+        <li>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Bookings</a>
+
+
+        </li>
 }
 </ul>
