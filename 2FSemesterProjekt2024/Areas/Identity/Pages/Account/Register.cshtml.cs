@@ -113,12 +113,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();
 
-            [Display(Name = "Driver")]
-            public bool Driver { get; set; }
-
-            [Display(Name = "Passenger")]
-            public bool Passenger { get; set; }
-
+       
         }
 
 
