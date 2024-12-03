@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _2FSemesterProjekt2024.Pages.Passengers
 {
-    [Authorize(Roles = "passenger")]
+    [Authorize(Roles = "passenger,passengerDriver")]
     public class GetPassengersModel : PageModel
     {
           public IEnumerable<Passenger> Passengers { get; set; }

@@ -32,6 +32,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        //Fordi det er strings rollerne er gemt i
         public List<string> AvailableRoles { get; set; }
 
 
@@ -107,7 +108,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            // 
+            
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();
         }
@@ -116,6 +117,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null) {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            //VI konverter vores data til en liste så den kan læses
             AvailableRoles = await _roleManager.Roles.Select(r => r.Name).ToListAsync();
         }
 
@@ -136,7 +138,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Assign selected roles
+                    // Here angiver vi rollerne ved at benytte nogle givet funktioner fra Identity pakken
                     foreach (var role in Input.SelectedRoles)
                     {
                         if (await _roleManager.RoleExistsAsync(role))
@@ -175,7 +177,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            
             return Page();
         }
 
