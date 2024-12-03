@@ -108,9 +108,17 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+
             
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();
+
+            [Display(Name = "Driver")]
+            public bool Driver { get; set; }
+
+            [Display(Name = "Passenger")]
+            public bool Passenger { get; set; }
+
         }
 
 

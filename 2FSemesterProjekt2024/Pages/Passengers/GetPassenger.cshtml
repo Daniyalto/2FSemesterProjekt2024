@@ -29,11 +29,12 @@
                     <td>  @item.Email  </td>
                     <td>  @item.PhoneNumber  </td>
 
-         <td>
-            <p>
-            <a asp-page="./Profile" asp-route-pid="@item.PassengerId">View profile</a>
-            </p>
-            </td> 
+                    <td>
+                         <p>
+                              <a asp-page="./Profile" asp-route-pid="@item.PassengerId">View profile</a>
+                               <a asp-page="Bookings/Create" asp-route-pid="@item.PassengerId">Create new booking</a>
+                          </p>
+                    </td> 
                 </tr>
             }
         }
