@@ -8,29 +8,34 @@ namespace _2FSemesterProjekt2024.Services
     public class DriverDBContext : IdentityDbContext<ApplicationUser>
     {
         public DriverDBContext(DbContextOptions options)
-            : base(options)
-        {
-
+            : base(options) {
         }
-
 
         public virtual DbSet<Booking> Bookings { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
+        protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            var passenger = new IdentityRole("Passenger");
-            passenger.NormalizedName = "passenger";
+            // Configure Roles
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Passenger", NormalizedName = "PASSENGER" },
+                new IdentityRole { Name = "Driver", NormalizedName = "DRIVER" },
+                new IdentityRole { Name = "PassengerDriver", NormalizedName = "PASSENGERDRIVER" }
+            );
 
-            var driver = new IdentityRole("driver");
-            driver.NormalizedName = "driver";
+            // Configure Relationships
+            builder.Entity<Booking>()
+                .HasOne(b => b.Driver)
+                .WithMany(u => u.BookingsAsDriver)
+                .HasForeignKey(b => b.DriverId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete for Driver
 
-            var passengerDriver = new IdentityRole("PassengerDriver");
-            passengerDriver.NormalizedName = "passengerDriver";
-
-            builder.Entity<IdentityRole>().HasData(passenger,driver,passengerDriver);
-
+            builder.Entity<Booking>()
+                .HasOne(b => b.Passenger)
+                .WithMany(u => u.BookingsAsPassenger)
+                .HasForeignKey(b => b.PassengerId)
+                .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete for Passenger
         }
+
     }
 }
