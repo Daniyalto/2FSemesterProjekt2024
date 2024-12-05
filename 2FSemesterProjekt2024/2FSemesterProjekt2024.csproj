@@ -8,19 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Bookings\BookingPassenger\**" />
     <Compile Remove="Pages\Booking\**" />
     <Compile Remove="Pages\Driver\**" />
     <Compile Remove="Pages\Passenger\**" />
-    <Content Remove="Pages\Bookings\BookingPassenger\**" />
     <Content Remove="Pages\Booking\**" />
     <Content Remove="Pages\Driver\**" />
     <Content Remove="Pages\Passenger\**" />
-    <EmbeddedResource Remove="Pages\Bookings\BookingPassenger\**" />
     <EmbeddedResource Remove="Pages\Booking\**" />
     <EmbeddedResource Remove="Pages\Driver\**" />
     <EmbeddedResource Remove="Pages\Passenger\**" />
-    <None Remove="Pages\Bookings\BookingPassenger\**" />
     <None Remove="Pages\Booking\**" />
     <None Remove="Pages\Driver\**" />
     <None Remove="Pages\Passenger\**" />

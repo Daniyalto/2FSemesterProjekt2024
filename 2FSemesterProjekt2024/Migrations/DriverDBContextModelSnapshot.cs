@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using _2FSemesterProjekt2024.Models;
+using _2FSemesterProjekt2024.Services;
 
 #nullable disable
 
@@ -51,20 +51,20 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d0de5aa3-950e-4c05-841c-086c5168b0fd",
-                            Name = "passenger",
+                            Id = "8c0e842b-c6c7-4be5-a1a6-019a863506a0",
+                            Name = "Passenger",
                             NormalizedName = "passenger"
                         },
                         new
                         {
-                            Id = "84ef6c9b-ad61-4fea-a9b0-bf2aaedb6ba4",
+                            Id = "2801a4de-509f-4a16-a049-2c90b49b8458",
                             Name = "driver",
                             NormalizedName = "driver"
                         },
                         new
                         {
-                            Id = "78ec9a52-6bbc-47b1-8551-f0d711dfffad",
-                            Name = "passengerDriver",
+                            Id = "b9b47779-f2b0-4a7c-abaf-1bdc90389d9a",
+                            Name = "PassengerDriver",
                             NormalizedName = "passengerDriver"
                         });
                 });
@@ -122,10 +122,12 @@ namespace _2FSemesterProjekt2024.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -162,10 +164,12 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -209,6 +213,10 @@ namespace _2FSemesterProjekt2024.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -232,6 +240,15 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -241,6 +258,10 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("VehicleInfo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -264,9 +285,7 @@ namespace _2FSemesterProjekt2024.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
                     b.Property<DateTime>("BookingTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime");
 
                     b.Property<int?>("DriverId")
                         .HasColumnType("int");
@@ -284,116 +303,12 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("BookingId")
-                        .HasName("PK__tmp_ms_x__73951AED33951DC6");
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
 
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("PassengerId");
+                    b.HasKey("BookingId");
 
                     b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Driver", b =>
-                {
-                    b.Property<int>("DriverId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DriverId"));
-
-                    b.Property<string>("DriverName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nchar(30)")
-                        .IsFixedLength();
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nchar(30)")
-                        .IsFixedLength();
-
-                    b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength();
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nchar(20)")
-                        .IsFixedLength();
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nchar(20)")
-                        .IsFixedLength();
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProfilePictureUrl")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(2, 1)");
-
-                    b.Property<string>("VehicleInfo")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nchar(200)")
-                        .IsFixedLength();
-
-                    b.HasKey("DriverId")
-                        .HasName("PK__tmp_ms_x__F1B1CD041BB02DEF");
-
-                    b.ToTable("Driver");
-                });
-
-            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Passenger", b =>
-                {
-                    b.Property<int>("PassengerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PassengerId"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nchar(40)")
-                        .IsFixedLength();
-
-                    b.Property<string>("PassengerName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nchar(30)")
-                        .IsFixedLength();
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nchar(20)")
-                        .IsFixedLength();
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nchar(20)")
-                        .IsFixedLength();
-
-                    b.Property<string>("ProfilePictureUrl")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("PassengerId")
-                        .HasName("PK__Passenge__88915FB075C23B1D");
-
-                    b.ToTable("Passenger");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -445,33 +360,6 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Booking", b =>
-                {
-                    b.HasOne("_2FSemesterProjekt2024.Models.Driver", "Driver")
-                        .WithMany("Bookings")
-                        .HasForeignKey("DriverId")
-                        .HasConstraintName("FK__Booking__DriverI__6B24EA82");
-
-                    b.HasOne("_2FSemesterProjekt2024.Models.Passenger", "Passenger")
-                        .WithMany("Bookings")
-                        .HasForeignKey("PassengerId")
-                        .HasConstraintName("FK__Booking__Passeng__6A30C649");
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Passenger");
-                });
-
-            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Driver", b =>
-                {
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Passenger", b =>
-                {
-                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

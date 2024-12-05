@@ -1,4 +1,5 @@
 using _2FSemesterProjekt2024.Models;
+using _2FSemesterProjekt2024.Services;
 using _2FSemesterProjekt2024.Services.EF;
 using _2FSemesterProjekt2024.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -27,8 +28,7 @@ namespace _2FSemesterProjekt2024
     .AddEntityFrameworkStores<DriverDBContext>();
 
             builder.Services.AddTransient<IBookingService, EFBookingService>();
-            builder.Services.AddTransient<IDriverService, EFDriverService>();
-            builder.Services.AddTransient<IPassengerService, EFPassengerService>();
+         
 
             builder.Services.AddSession(options =>
             {

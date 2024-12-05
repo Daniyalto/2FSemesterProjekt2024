@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _2FSemesterProjekt2024.Migrations
 {
     /// <inheritdoc />
-    public partial class Firstmigration : Migration
+    public partial class Test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,11 @@ namespace _2FSemesterProjekt2024.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Points = table.Column<int>(type: "int", nullable: true),
+                    ProfilePictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -57,41 +62,21 @@ namespace _2FSemesterProjekt2024.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Driver",
+                name: "Booking",
                 columns: table => new
                 {
-                    DriverId = table.Column<int>(type: "int", nullable: false)
+                    BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DriverName = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
-                    Email = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
-                    Password = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
-                    VehicleInfo = table.Column<string>(type: "nchar(200)", fixedLength: true, maxLength: 200, nullable: false),
-                    LicenseNumber = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(2,1)", nullable: false),
-                    Points = table.Column<int>(type: "int", nullable: false),
-                    ProfilePictureUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    DriverId = table.Column<int>(type: "int", nullable: true),
+                    PassengerId = table.Column<int>(type: "int", nullable: true),
+                    PickupLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    DropoffLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Seats = table.Column<int>(type: "int", nullable: false),
+                    BookingTime = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__tmp_ms_x__F1B1CD041BB02DEF", x => x.DriverId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Passenger",
-                columns: table => new
-                {
-                    PassengerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PassengerName = table.Column<string>(type: "nchar(30)", fixedLength: true, maxLength: 30, nullable: false),
-                    Email = table.Column<string>(type: "nchar(40)", fixedLength: true, maxLength: 40, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
-                    Password = table.Column<string>(type: "nchar(20)", fixedLength: true, maxLength: 20, nullable: false),
-                    ProfilePictureUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__Passenge__88915FB075C23B1D", x => x.PassengerId);
+                    table.PrimaryKey("PK_Booking", x => x.BookingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,8 +125,8 @@ namespace _2FSemesterProjekt2024.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -185,8 +170,8 @@ namespace _2FSemesterProjekt2024.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -200,41 +185,14 @@ namespace _2FSemesterProjekt2024.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    BookingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DriverId = table.Column<int>(type: "int", nullable: true),
-                    PassengerId = table.Column<int>(type: "int", nullable: true),
-                    PickupLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DropoffLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    BookingTime = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK__tmp_ms_x__73951AED33951DC6", x => x.BookingId);
-                    table.ForeignKey(
-                        name: "FK__Booking__DriverI__6B24EA82",
-                        column: x => x.DriverId,
-                        principalTable: "Driver",
-                        principalColumn: "DriverId");
-                    table.ForeignKey(
-                        name: "FK__Booking__Passeng__6A30C649",
-                        column: x => x.PassengerId,
-                        principalTable: "Passenger",
-                        principalColumn: "PassengerId");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "78ec9a52-6bbc-47b1-8551-f0d711dfffad", null, "passengerDriver", "passengerDriver" },
-                    { "84ef6c9b-ad61-4fea-a9b0-bf2aaedb6ba4", null, "driver", "driver" },
-                    { "d0de5aa3-950e-4c05-841c-086c5168b0fd", null, "passenger", "passenger" }
+                    { "2801a4de-509f-4a16-a049-2c90b49b8458", null, "driver", "driver" },
+                    { "8c0e842b-c6c7-4be5-a1a6-019a863506a0", null, "Passenger", "passenger" },
+                    { "b9b47779-f2b0-4a7c-abaf-1bdc90389d9a", null, "PassengerDriver", "passengerDriver" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -275,16 +233,6 @@ namespace _2FSemesterProjekt2024.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_DriverId",
-                table: "Booking",
-                column: "DriverId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_PassengerId",
-                table: "Booking",
-                column: "PassengerId");
         }
 
         /// <inheritdoc />
@@ -313,12 +261,6 @@ namespace _2FSemesterProjekt2024.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Driver");
-
-            migrationBuilder.DropTable(
-                name: "Passenger");
         }
     }
 }
