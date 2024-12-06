@@ -12,7 +12,22 @@
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            
+
+            <div class="form-floating mb-3">
+                <h4>Select Roles:</h4>
+                <div>
+                    <input type="radio" id="driver" name="Input.SelectedRoles" value="driver" />
+                    <label for="driver">Driver</label>
+                </div>
+                <div>
+                    <input type="radio" id="passenger" name="Input.SelectedRoles" value="passenger" />
+                    <label for="passenger">Passenger</label>
+                </div>
+                <div>
+                    <input type="radio" id="passengerDriver" name="Input.SelectedRoles" value="passengerDriver" />
+                    <label for="passengerDriver">PassengerDriver</label>
+                </div>
+            </div>
             
             <div class="form-floating mb-3">
                 <input asp-for="Input.FirstName" class="form-control" autocomplete="First name" aria-required="true" placeholder="firstname" />
@@ -60,23 +75,8 @@
         <label asp-for="Input.LicenseNumber">License Number</label>
         <span asp-validation-for="Input.LicenseNumber" class="text-danger"></span>
     </div>
-</div>
+    </div>
 
-            <div class="form-floating mb-3">
-    
-    <div>
-        <input type="radio" id="driver" name="Input.SelectedRoles" value="driver" />
-        <label for="driver">Driver</label>
-    </div>
-    <div>
-        <input type="radio" id="passenger" name="Input.SelectedRoles" value="passenger" />
-        <label for="passenger">Passenger</label>
-    </div>
-    <div>
-        <input type="radio" id="passengerDriver" name="Input.SelectedRoles" value="passengerDriver" />
-        <label for="passengerDriver">PassengerDriver</label>
-    </div>
-</div>
             
             
 
