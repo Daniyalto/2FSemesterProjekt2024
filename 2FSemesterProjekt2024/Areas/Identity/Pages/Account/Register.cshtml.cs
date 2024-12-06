@@ -153,8 +153,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     // Check if AvailableRoles is not null before iterating
-                    if (Input.SelectedRoles != null && Input.SelectedRoles.Any())
-                    {
+                   
                         foreach (var role in Input.SelectedRoles)
                         {
                             if (await _roleManager.RoleExistsAsync(role))
@@ -162,12 +161,8 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                                 await _userManager.AddToRoleAsync(user, role);
                             }
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Please select at least one role.");
-                        return Page();
-                    }
+                    
+                   
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
