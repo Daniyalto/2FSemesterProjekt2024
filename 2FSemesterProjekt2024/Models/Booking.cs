@@ -1,37 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-namespace _2FSemesterProjekt2024.Models;
-
-[Table("Booking")]
-public partial class Booking
+namespace _2FSemesterProjekt2024.Models
 {
-    [Key]
-    public int BookingId { get; set; }
+    [Table("Booking")]
+    public partial class Booking
+    {
+        [Key]
+        public int BookingId { get; set; }
 
-    public int? DriverId { get; set; }
+        [ForeignKey("Driver")]
+        public string? DriverId { get; set; }
 
-    public int? PassengerId { get; set; }
+        [ForeignKey("Passenger")]
+        public string? PassengerId { get; set; }
 
-    [StringLength(200)]
-    public string PickupLocation { get; set; } = null!;
+        [Required]
+        [StringLength(200)]
+        public string PickupLocation { get; set; } = null!;
 
-    [StringLength(200)]
-    public string DropoffLocation { get; set; } = null!;
-    
-    public int Seats {  get; set; }
+        [Required]
+        [StringLength(200)]
+        public string DropoffLocation { get; set; } = null!;
 
-    [Column(TypeName = "datetime")]
-    public DateTime BookingTime { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "The number of seats must be at least 1.")]
+        public int Seats { get; set; }
 
-    [ForeignKey("DriverId")]
-    [InverseProperty("Bookings")]
-    public virtual Driver? Driver { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime BookingTime { get; set; }
 
-    [ForeignKey("PassengerId")]
-    [InverseProperty("Bookings")]
-    public virtual Passenger? Passenger { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? UpdatedAt { get; set; }
+
+        // Navigation Properties
+        public virtual ApplicationUser? Driver { get; set; }
+        public virtual ApplicationUser? Passenger { get; set; }
+    }
 }
+
