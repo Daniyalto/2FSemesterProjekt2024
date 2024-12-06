@@ -63,10 +63,10 @@
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Driver.Id)
+                    @Html.DisplayFor(modelItem => item.Driver.FirstName) @Html.DisplayFor(modelItem => item.Driver.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Passenger.Id)
+                    @Html.DisplayFor(modelItem => item.Passenger.FirstName) @Html.DisplayFor(modelItem => item.Passenger.LastName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |

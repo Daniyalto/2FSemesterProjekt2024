@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _2FSemesterProjekt2024.Pages.Bookning
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly _2FSemesterProjekt2024.Services.DriverDBContext _context;
@@ -39,18 +41,9 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
             }
 
             var userName = User.Identity?.Name;
-            if (userName == null)
-            {
-                ModelState.AddModelError("", "User is not logged in.");
-                return Page();
-            }
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName || u.Email == userName);
-            if (user == null)
-            {
-                ModelState.AddModelError("", "Logged-in user not found.");
-                return Page();
-            }
+
 
             Booking.DriverId = user.Id;
 

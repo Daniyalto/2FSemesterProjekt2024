@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _2FSemesterProjekt2024.Pages.Bookning
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly _2FSemesterProjekt2024.Services.DriverDBContext _context;
