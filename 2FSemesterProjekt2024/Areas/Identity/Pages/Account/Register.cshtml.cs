@@ -107,15 +107,20 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Required]
             [StringLength(25)]
             public string FirstName { get; set; }
-
+            [Required]
+            [StringLength(25)]
             public string LastName { get; set; }
-
+            [Required]
+            [StringLength(40)]
             public string Address { get; set; }
-
+            [Required]
+            [StringLength(8)]
             public string PhoneNumber { get; set; }
-
+            [Required]
+            [StringLength(50)]
             public string VehicleInfo { get; set; }
-
+            [Required]
+            [StringLength(10)]
             public string LicenseNumber { get; set; }
 
             [Display(Name = "Select Roles")]
