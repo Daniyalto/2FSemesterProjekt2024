@@ -116,12 +116,10 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Required]
             [StringLength(8)]
             public string PhoneNumber { get; set; }
-            [Required]
             [StringLength(50)]
-            public string VehicleInfo { get; set; }
-            [Required]
+            public string? VehicleInfo { get; set; }
             [StringLength(10)]
-            public string LicenseNumber { get; set; }
+            public string? LicenseNumber { get; set; }
 
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();

@@ -13,21 +13,21 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
-            <div class="form-floating mb-3">
-                <h4>Select Roles:</h4>
-                <div>
-                    <input type="radio" id="driver" name="Input.SelectedRoles" value="driver" />
-                    <label for="driver">Driver</label>
-                </div>
-                <div>
-                    <input type="radio" id="passenger" name="Input.SelectedRoles" value="passenger" />
-                    <label for="passenger">Passenger</label>
-                </div>
-                <div>
-                    <input type="radio" id="passengerDriver" name="Input.SelectedRoles" value="passengerDriver" />
-                    <label for="passengerDriver">PassengerDriver</label>
-                </div>
-            </div>
+                    <div class="form-floating mb-3">
+    <h4>Select Roles:</h4>
+    <div>
+        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" />
+        <label for="role-Driver">Driver</label>
+    </div>
+    <div>
+        <input type="radio" id="role-Passenger" name="Input.SelectedRoles" value="Passenger" />
+        <label for="role-Passenger">Passenger</label>
+    </div>
+    <div>
+        <input type="radio" id="role-PassengerDriver" name="Input.SelectedRoles" value="PassengerDriver" />
+        <label for="role-PassengerDriver">PassengerDriver</label>
+    </div>
+</div>
             
             <div class="form-floating mb-3">
                 <input asp-for="Input.FirstName" class="form-control" autocomplete="First name" aria-required="true" placeholder="firstname" />
@@ -134,12 +134,12 @@
     <partial name="_ValidationScriptsPartial" />
 } *@
 @section Scripts {
-        <script>
+            <script>
         document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => {
             radio.addEventListener('change', function () {
                 const driverFields = document.getElementById('driverFields');
                 // Show fields if Driver or PassengerDriver is selected
-                if (this.value === 'driver' || this.value === 'passengerDriver') {
+                if (this.value === 'Driver' || this.value === 'PassengerDriver') {
                     driverFields.style.display = 'block'; // Show driver-specific fields
                 } else {
                     driverFields.style.display = 'none'; // Hide driver-specific fields
