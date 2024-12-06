@@ -104,6 +104,20 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [StringLength(25)]
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
+
+            public string Address { get; set; }
+
+            public string PhoneNumber { get; set; }
+
+            public string VehicleInfo { get; set; }
+
+            public string LicenseNumber { get; set; }
+
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();
         }
@@ -120,6 +134,7 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -132,12 +147,21 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    foreach (var role in Input.SelectedRoles)
+                    // Check if AvailableRoles is not null before iterating
+                    if (Input.SelectedRoles != null && Input.SelectedRoles.Any())
                     {
-                        if(await _roleManager.RoleExistsAsync(role))
+                        foreach (var role in Input.SelectedRoles)
                         {
-                            await _userManager.AddToRoleAsync(user, role);
+                            if (await _roleManager.RoleExistsAsync(role))
+                            {
+                                await _userManager.AddToRoleAsync(user, role);
+                            }
                         }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Please select at least one role.");
+                        return Page();
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);
