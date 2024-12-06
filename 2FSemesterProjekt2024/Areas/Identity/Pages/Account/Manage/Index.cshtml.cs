@@ -59,6 +59,28 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Display(Name = "Vehicle info")]
+            public string VehicleInfo { get; set; }
+
+            [Display(Name = "License number")]
+            public string LicenseNumber { get; set; }
+
+            [Display(Name = "Rating")]
+            public decimal Rating { get; }
+
+            [Display(Name = "Points")]
+            public int Points { get; }
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -70,7 +92,12 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                VehicleInfo = user.VehicleInfo,
+                LicenseNumber = user.LicenseNumber,
             };
         }
 
@@ -110,6 +137,52 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+
+
+            bool updateUser = false;
+
+            if (user.FirstName != Input.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+                updateUser = true;
+            }
+
+            if (user.LastName != Input.LastName)
+            {
+                user.LastName = Input.LastName;
+                updateUser = true;
+            }
+
+            if (user.Address != Input.Address)
+            {
+                user.Address = Input.Address;
+                updateUser = true;
+            }
+
+            if (user.VehicleInfo != Input.VehicleInfo)
+            {
+                user.VehicleInfo = Input.VehicleInfo;
+                updateUser = true;
+            }
+
+            if (user.LicenseNumber != Input.LicenseNumber)
+            {
+                user.LicenseNumber = Input.LicenseNumber;
+                updateUser = true;
+            }
+
+
+            if (updateUser)
+            {
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to update profile information.";
+                    return RedirectToPage();
+                }
+            }
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

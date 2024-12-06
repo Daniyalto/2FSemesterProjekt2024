@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model IndexModel 
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -15,11 +15,56 @@
                 <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
+            
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <input asp-for="Input.FirstName" class="form-control" placeholder="Please enter your first name." />
+                <label asp-for="Input.FirstName" class="form-label"></label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LastName" class="form-control" placeholder="Please enter your last name." />
+                <label asp-for="Input.LastName" class="form-label"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Address" class="form-control" placeholder="Please enter your address." />
+                <label asp-for="Input.Address" class="form-label"></label>
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
+            @if (User.IsInRole("Driver") || User.IsInRole("PassengerDriver"))
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.VehicleInfo" class="form-control" placeholder="Please enter your vehicle info." />
+                    <label asp-for="Input.VehicleInfo" class="form-label"></label>
+                    <span asp-validation-for="Input.VehicleInfo" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.LicenseNumber" class="form-control" placeholder="Please enter your license number." />
+                    <label asp-for="Input.LicenseNumber" class="form-label"></label>
+                    <span asp-validation-for="Input.LicenseNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Rating" class="form-control" placeholder="Rating" disabled/>
+                    <label asp-for="Input.Rating" class="form-label"></label>
+                    <span asp-validation-for="Input.Rating" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Points" class="form-control" placeholder="Points" disabled />
+                    <label asp-for="Input.Points" class="form-label"></label>
+                    <span asp-validation-for="Input.Points" class="text-danger"></span>
+                </div>
+            }
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>
