@@ -141,6 +141,13 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                // Set additional properties on the user object
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+                user.PhoneNumber = Input.PhoneNumber;
+                user.VehicleInfo = Input.VehicleInfo;
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
