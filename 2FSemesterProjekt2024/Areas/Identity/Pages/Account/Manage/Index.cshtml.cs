@@ -68,6 +68,19 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Address")]
             public string Address { get; set; }
+
+            [Display(Name = "Vehicle info")]
+            public string VehicleInfo { get; set; }
+
+            [Display(Name = "License number")]
+            public string LicenseNumber { get; set; }
+
+            [Display(Name = "Rating")]
+            public decimal Rating { get; }
+
+            [Display(Name = "Points")]
+            public int Points { get; }
+
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -83,6 +96,8 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Address = user.Address,
+                VehicleInfo = user.VehicleInfo,
+                LicenseNumber = user.LicenseNumber,
             };
         }
 
@@ -145,6 +160,19 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
                 updateUser = true;
             }
 
+            if (user.VehicleInfo != Input.VehicleInfo)
+            {
+                user.VehicleInfo = Input.VehicleInfo;
+                updateUser = true;
+            }
+
+            if (user.LicenseNumber != Input.LicenseNumber)
+            {
+                user.LicenseNumber = Input.LicenseNumber;
+                updateUser = true;
+            }
+
+
             if (updateUser)
             {
                 var updateResult = await _userManager.UpdateAsync(user);
@@ -154,12 +182,6 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-
-
-
-
-
-
 
 
             await _signInManager.RefreshSignInAsync(user);
