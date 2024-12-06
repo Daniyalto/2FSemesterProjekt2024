@@ -150,8 +150,10 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Address = Input.Address;
-                user.PhoneNumber = Input.PhoneNumber;
                 user.VehicleInfo = Input.VehicleInfo;
+                user.LicenseNumber = Input.LicenseNumber;
+                
+
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
