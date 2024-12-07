@@ -44,8 +44,15 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName || u.Email == userName);
 
+            if (User.IsInRole("Driver"))
+            {
+                Booking.DriverId = user.Id;
+            }
+            if (User.IsInRole("Passenger"))
+            {
+                Booking.PassengerId = user.Id;
+            }
 
-            Booking.DriverId = user.Id;
 
             Booking.CreatedAt = DateTime.UtcNow;
             Booking.UpdatedAt = DateTime.UtcNow;
