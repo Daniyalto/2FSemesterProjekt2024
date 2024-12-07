@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace _2FSemesterProjekt2024.Pages.Bookning
 {
@@ -23,6 +24,10 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
         public IList<Booking> Booking { get;set; } = default!;
 
+        public string UserId { get; set; }
+
+
+
         public async Task OnGetAsync()
         {
             //if (User.Identity.Name == userName)
@@ -31,13 +36,24 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
             //}
 
 
-            var userEmail = User.Identity.Name;
+            //UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //var userEmail = User.Identity.Name;
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            //Booking = await _context.Bookings
+            //    .Include(b => b.Driver)
+            //    .Include(b => b.Passenger)
+            //    .Where(b => b.Passenger.Email == userEmail)
+            //    .Where(b => b.Driver.Email == userEmail).ToListAsync();
+
 
             Booking = await _context.Bookings
+                //.Include(b => b.Passenger)
                 .Include(b => b.Driver)
-                .Include(b => b.Passenger)
-                .Where(b => b.Passenger.Email == userEmail)
-                .Where(b => b.Driver.Email == userEmail).ToListAsync();
+                //.Where(b => b.Passenger.Id == userId)
+                .Where(b => b.Driver.Id == userId).ToListAsync();
 
             //if (User.IsInRole("Driver"))
             //{
