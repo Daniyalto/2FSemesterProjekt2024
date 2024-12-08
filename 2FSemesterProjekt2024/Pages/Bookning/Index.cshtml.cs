@@ -51,14 +51,24 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
             //    .Where(b => b.Passenger.Email == userEmail)
             //    .Where(b => b.Driver.Email == userEmail).ToListAsync();
 
+            if (User.IsInRole("Driver"))
+            {
+                Booking = await _context.Bookings
+               //.Include(b => b.Passenger)
+               .Include(b => b.Driver)
+               //.Where(b => b.Passenger.Id == UserId)
+               .Where(b => b.Driver.Id == UserId).ToListAsync();
+            }
+            if (User.IsInRole("Passenger"))
+            {
+                Booking = await _context.Bookings
+               .Include(b => b.Passenger)
+               //.Include(b => b.Driver)
+               .Where(b => b.Passenger.Id == UserId)
+               /*.Where(b => b.Driver.Id == UserId)*/.ToListAsync();
+            }
 
-            Booking = await _context.Bookings
-                //.Include(b => b.Passenger)
-                .Include(b => b.Driver)
-                //.Where(b => b.Passenger.Id == UserId)
-                .Where(b => b.Driver.Id == UserId).ToListAsync();
 
-            
             //Booking = await _context.Bookings.Include(b => b.PassengerId).Include(b => b.DriverId).Where(b => b.PassengerId == userId).ToListAsync();
 
 
