@@ -41,9 +41,9 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
             UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var userEmail = User.Identity.Name;
+            //var userEmail = User.Identity.Name;
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value.ToList();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             //Booking = await _context.Bookings
             //    .Include(b => b.Driver)
@@ -53,9 +53,9 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
 
             Booking = await _context.Bookings
-                .Include(b => b.Passenger)
+                //.Include(b => b.Passenger)
                 .Include(b => b.Driver)
-                .Where(b => b.Passenger.Id == UserId)
+                //.Where(b => b.Passenger.Id == UserId)
                 .Where(b => b.Driver.Id == UserId).ToListAsync();
 
             
