@@ -12,7 +12,7 @@ namespace _2FSemesterProjekt2024.Services
         }
 
         public virtual DbSet<Booking> Bookings { get; set; }
-
+     
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 

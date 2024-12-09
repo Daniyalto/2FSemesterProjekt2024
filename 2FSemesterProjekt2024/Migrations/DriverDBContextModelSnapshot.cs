@@ -328,7 +328,7 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.HasIndex("PassengerId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Booking", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
