@@ -57,21 +57,27 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
+            [Required(ErrorMessage ="Phone number is required")]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
+            [Required(ErrorMessage = "First name is required")]
             [Display(Name = "First name")]
             public string FirstName { get; set; }
 
+            [Required(ErrorMessage = "Last name is required")]
             [Display(Name = "Last name")]
             public string LastName { get; set; }
 
+            [Required(ErrorMessage = "Address is required")]
             [Display(Name = "Address")]
             public string Address { get; set; }
 
+            [Required(ErrorMessage = "Vehicle info is required")]
             [Display(Name = "Vehicle info")]
             public string VehicleInfo { get; set; }
 
+            [Required(ErrorMessage = "License number is required")]
             [Display(Name = "License number")]
             public string LicenseNumber { get; set; }
 
@@ -168,13 +174,14 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
 
             if (user.LicenseNumber != Input.LicenseNumber)
             {
-                user.LicenseNumber = Input.LicenseNumber;
-                updateUser = true;
+                    user.LicenseNumber = Input.LicenseNumber;
+                    updateUser = true;
             }
 
 
             if (updateUser)
             {
+
                 var updateResult = await _userManager.UpdateAsync(user);
                 if (!updateResult.Succeeded)
                 {

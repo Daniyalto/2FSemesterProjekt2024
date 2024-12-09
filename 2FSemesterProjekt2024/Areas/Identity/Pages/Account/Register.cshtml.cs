@@ -104,6 +104,23 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [StringLength(25)]
+            public string FirstName { get; set; }
+            [Required]
+            [StringLength(25)]
+            public string LastName { get; set; }
+            [Required]
+            [StringLength(40)]
+            public string Address { get; set; }
+            [Required]
+            [StringLength(8)]
+            public string PhoneNumber { get; set; }
+            [StringLength(50)]
+            public string? VehicleInfo { get; set; }
+            [StringLength(10)]
+            public string? LicenseNumber { get; set; }
+
             [Display(Name = "Select Roles")]
             public List<string> SelectedRoles { get; set; } = new List<string>();
         }
@@ -120,25 +137,39 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                // Set additional properties on the user object
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Address = Input.Address;
+                user.VehicleInfo = Input.VehicleInfo;
+                user.LicenseNumber = Input.LicenseNumber;
+                
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    foreach (var role in Input.SelectedRoles)
-                    {
-                        if(await _roleManager.RoleExistsAsync(role))
+                    // Check if AvailableRoles is not null before iterating
+                   
+                        foreach (var role in Input.SelectedRoles)
                         {
-                            await _userManager.AddToRoleAsync(user, role);
+                            if (await _roleManager.RoleExistsAsync(role))
+                            {
+                                await _userManager.AddToRoleAsync(user, role);
+                            }
                         }
-                    }
+                    
+                   
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
