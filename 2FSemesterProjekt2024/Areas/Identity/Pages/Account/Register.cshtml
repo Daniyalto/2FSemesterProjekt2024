@@ -133,8 +133,9 @@
 @* @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 } *@
-@section Scripts {
-            <script>
+@section Scripts 
+{
+    <script>
         document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => {
             radio.addEventListener('change', function () {
                 const driverFields = document.getElementById('driverFields');
