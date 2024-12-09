@@ -12,23 +12,75 @@
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
 
-            <div>
+                    <div class="form-floating mb-3">
+    <h4>Select Roles:</h4>
+    <div>
+        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" />
+        <label for="role-Driver">Driver</label>
+    </div>
+    <div>
+        <input type="radio" id="role-Passenger" name="Input.SelectedRoles" value="Passenger" />
+        <label for="role-Passenger">Passenger</label>
+    </div>
+    <div>
+        <input type="radio" id="role-PassengerDriver" name="Input.SelectedRoles" value="PassengerDriver" />
+        <label for="role-PassengerDriver">PassengerDriver</label>
+    </div>
+</div>
+            
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="First name" aria-required="true" placeholder="firstname" />
+                <label asp-for="Input.FirstName">First Name</label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="last name" aria-required="true" placeholder="Lastname" />
+                <label asp-for="Input.LastName">Last Name</label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Address" class="form-control" autocomplete="Address" aria-required="true" placeholder="address" />
+                <label asp-for="Input.Address">Address</label>
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="Phonenumber" aria-required="true" placeholder="phonenumber" />
+                <label asp-for="Input.PhoneNumber">Phonenumber</label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+        <label asp-for="Input.Email">Email</label>
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+        <label asp-for="Input.Password">Password</label>
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+    </div>
+           <div id="driverFields" style="display: none;">
+    <div class="form-floating mb-3">
+        <input asp-for="Input.VehicleInfo" class="form-control" autocomplete="vehicle-info" aria-required="true" placeholder="Vehicle info" />
+        <label asp-for="Input.VehicleInfo">Vehicle info</label>
+        <span asp-validation-for="Input.VehicleInfo" class="text-danger"></span>
+    </div>
+    <div class="form-floating mb-3">
+        <input asp-for="Input.LicenseNumber" class="form-control" autocomplete="license-number" aria-required="true" placeholder="License number" />
+        <label asp-for="Input.LicenseNumber">License Number</label>
+        <span asp-validation-for="Input.LicenseNumber" class="text-danger"></span>
+    </div>
+    </div>
+
+            
+            
+
+            @* <div>
                 <h4>Select Roles:</h4>
                 @foreach (var role in Model.AvailableRoles)
                 {
@@ -37,8 +89,8 @@
                         <label for="role-@role">@role</label>
                     </div>
                 }
-            </div>
-
+            </div> *@
+            
 
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
 
@@ -78,6 +130,21 @@
     </div>
 </div>
 
-@section Scripts {
+@* @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+} *@
+@section Scripts {
+            <script>
+        document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                const driverFields = document.getElementById('driverFields');
+                // Show fields if Driver or PassengerDriver is selected
+                if (this.value === 'Driver' || this.value === 'PassengerDriver') {
+                    driverFields.style.display = 'block'; // Show driver-specific fields
+                } else {
+                    driverFields.style.display = 'none'; // Hide driver-specific fields
+                }
+            });
+        });
+    </script>
 }
