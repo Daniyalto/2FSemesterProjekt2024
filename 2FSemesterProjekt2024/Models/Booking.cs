@@ -16,6 +16,9 @@ namespace _2FSemesterProjekt2024.Models
         [ForeignKey("Passenger")]
         public string? PassengerId { get; set; }
 
+        [ForeignKey("PassengerDriver")]
+        public string? PassengerDriverId { get; set; }
+
         [Required]
         [StringLength(200)]
         public string PickupLocation { get; set; } = null!;

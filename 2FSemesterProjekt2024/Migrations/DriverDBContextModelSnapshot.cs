@@ -51,19 +51,19 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "db69782d-8766-4b9d-b67b-5e91dfa2b811",
+                            Id = "569a40f6-d3ac-4050-90ac-86341cfb4905",
                             Name = "Passenger",
                             NormalizedName = "PASSENGER"
                         },
                         new
                         {
-                            Id = "94958059-5c96-4cd9-a59d-d23aa641ad2b",
+                            Id = "9eb056d4-9d5b-4e0a-8e38-3ab4d987fd05",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "e695cd8e-33ae-4b98-84c5-14f60acd464d",
+                            Id = "735f738c-b9b2-4f81-976a-2bbc8088dfdd",
                             Name = "PassengerDriver",
                             NormalizedName = "PASSENGERDRIVER"
                         });
@@ -218,7 +218,6 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LicenseNumber")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -266,7 +265,6 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("VehicleInfo")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -305,6 +303,9 @@ namespace _2FSemesterProjekt2024.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PassengerDriverId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassengerId")
                         .HasColumnType("nvarchar(450)");

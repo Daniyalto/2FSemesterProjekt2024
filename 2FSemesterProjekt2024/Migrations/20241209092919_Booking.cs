@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _2FSemesterProjekt2024.Migrations
 {
     /// <inheritdoc />
-    public partial class oneTable : Migration
+    public partial class Booking : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,8 +36,8 @@ namespace _2FSemesterProjekt2024.Migrations
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VehicleInfo = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    LicenseNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VehicleInfo = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Points = table.Column<int>(type: "int", nullable: true),
                     ProfilePictureUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
@@ -175,6 +175,7 @@ namespace _2FSemesterProjekt2024.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DriverId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PassengerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PassengerDriverId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PickupLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DropoffLocation = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Seats = table.Column<int>(type: "int", nullable: false),
@@ -204,9 +205,9 @@ namespace _2FSemesterProjekt2024.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "94958059-5c96-4cd9-a59d-d23aa641ad2b", null, "Driver", "DRIVER" },
-                    { "db69782d-8766-4b9d-b67b-5e91dfa2b811", null, "Passenger", "PASSENGER" },
-                    { "e695cd8e-33ae-4b98-84c5-14f60acd464d", null, "PassengerDriver", "PASSENGERDRIVER" }
+                    { "569a40f6-d3ac-4050-90ac-86341cfb4905", null, "Passenger", "PASSENGER" },
+                    { "735f738c-b9b2-4f81-976a-2bbc8088dfdd", null, "PassengerDriver", "PASSENGERDRIVER" },
+                    { "9eb056d4-9d5b-4e0a-8e38-3ab4d987fd05", null, "Driver", "DRIVER" }
                 });
 
             migrationBuilder.CreateIndex(

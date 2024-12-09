@@ -21,10 +21,10 @@ namespace _2FSemesterProjekt2024.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [StringLength(200)]
-        public string VehicleInfo { get; set; } = "";
+        public string? VehicleInfo { get; set; } = "";
 
         [StringLength(50)]
-        public string LicenseNumber { get; set; } = "";
+        public string? LicenseNumber { get; set; } = "";
 
         [Range(0, 5)]
         public decimal? Rating { get; set; }
