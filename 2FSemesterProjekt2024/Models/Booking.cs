@@ -28,7 +28,7 @@ namespace _2FSemesterProjekt2024.Models
         public string DropoffLocation { get; set; } = null!;
 
         [Range(1, int.MaxValue, ErrorMessage = "The number of seats must be at least 1.")]
-        public int Seats { get; set; }
+        public int? Seats { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTime BookingTime { get; set; }
