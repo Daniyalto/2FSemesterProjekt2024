@@ -33,65 +33,21 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
         public async Task OnGetAsync()
         {
-            //if (User.Identity.Name == userName)
-            //{
-            //    Booking= await _context.Bookings.FindAsync(x => x.user == userName);
-            //}
-
-
             UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            //var userEmail = User.Identity.Name;
-
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            //Booking = await _context.Bookings
-            //    .Include(b => b.Driver)
-            //    .Include(b => b.Passenger)
-            //    .Where(b => b.Passenger.Email == userEmail)
-            //    .Where(b => b.Driver.Email == userEmail).ToListAsync();
 
             if (User.IsInRole("Driver"))
             {
                 Booking = await _context.Bookings
-               //.Include(b => b.Passenger)
                .Include(b => b.Driver)
-               //.Where(b => b.Passenger.Id == UserId)
                .Where(b => b.Driver.Id == UserId).ToListAsync();
             }
             if (User.IsInRole("Passenger"))
             {
                 Booking = await _context.Bookings
                .Include(b => b.Passenger)
-               //.Include(b => b.Driver)
                .Where(b => b.Passenger.Id == UserId)
-               /*.Where(b => b.Driver.Id == UserId)*/.ToListAsync();
+               .ToListAsync();
             }
-
-
-            //Booking = await _context.Bookings.Include(b => b.PassengerId).Include(b => b.DriverId).Where(b => b.PassengerId == userId).ToListAsync();
-
-
-
-            //if (User.IsInRole("Driver"))
-            //{
-            //    Booking = await _context.Bookings
-            //    .Include(b => b.Driver)
-            //    .ToListAsync();
-            //}
-            //else if (User.IsInRole("Passenger"))
-            //{
-            //    Booking = await _context.Bookings
-            //    .Include(b => b.Passenger)
-            //    .ToListAsync();
-            //}
-            //else if (User.IsInRole("PassengerDriver"))
-            //{
-            //    Booking = await _context.Bookings
-            //    .Include(b => b.Passenger).Include(b => b.Driver)
-            //    .ToListAsync();
-            //}
-
         }
     }
 }

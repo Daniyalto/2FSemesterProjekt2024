@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using _2FSemesterProjekt2024.Models;
 using _2FSemesterProjekt2024.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace _2FSemesterProjekt2024.Pages.Bookning
 {
@@ -25,6 +26,8 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
+        public string UserId {  get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -38,8 +41,8 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
                 return NotFound();
             }
             Booking = booking;
-           ViewData["DriverId"] = new SelectList(_context.Users, "Id", "Id");
-           ViewData["PassengerId"] = new SelectList(_context.Users, "Id", "Id");
+           //ViewData["DriverId"] = new SelectList(_context.Users, "Id", "Id");
+           //ViewData["PassengerId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 
@@ -70,7 +73,25 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
                 }
             }
 
+            UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (User.IsInRole("Driver"))
+            {
+                Booking.DriverId = UserId;
+            }
+            if (User.IsInRole("Passenger"))
+            {
+                Booking.PassengerId = UserId;
+            }
+
+            
+            _context.Bookings.Update(Booking);
+            await _context.SaveChangesAsync();
+
+
             return RedirectToPage("./Index");
+
+
         }
 
         private bool BookingExists(int id)

@@ -22,7 +22,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
             _context = context;
         }
 
-        public IActionResult OnGet(int uid)
+        public IActionResult OnGet()
         {
         //ViewData["DriverId"] = new SelectList(_context.Users, "Id", "Id");
         //ViewData["PassengerId"] = new SelectList(_context.Users, "Id", "Id");
