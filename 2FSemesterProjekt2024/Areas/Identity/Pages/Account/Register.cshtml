@@ -80,4 +80,22 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+} *@
+@section Scripts {
+            <script>
+        document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => 
+        {
+            radio.addEventListener('change', function () 
+            {
+                const driverFields = document.getElementById('driverFields');
+                // Show fields if Driver or PassengerDriver is selected
+                if (this.value === 'Driver' || this.value === 'PassengerDriver') 
+                {
+                    driverFields.style.display = 'block'; // Show driver-specific fields
+                } else {
+                    driverFields.style.display = 'none'; // Hide driver-specific fields
+                }
+            });
+        });
+    </script>
 }
