@@ -36,7 +36,7 @@
 
             <div class="form-floating mb-3">
                 <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
-                <l abel asp-for="Input.PhoneNumber" class="form-label"></label>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             @if (User.IsInRole("Driver") || User.IsInRole("PassengerDriver"))
