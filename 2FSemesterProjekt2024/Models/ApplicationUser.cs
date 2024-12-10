@@ -16,7 +16,7 @@ namespace _2FSemesterProjekt2024.Models
         public string? LicenseNumber { get; set; }
 
         public decimal? Rating { get; set; }
-        public int? Points { get; set; }
+        public int Points { get; set; } = 0;
 
         // Navigation Properties
         public ICollection<BookingParticipant> BookingParticipants { get; set; } = new List<BookingParticipant>();

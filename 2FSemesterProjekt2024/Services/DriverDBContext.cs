@@ -29,13 +29,13 @@ namespace _2FSemesterProjekt2024.Services
                 .HasOne(b => b.Driver)
                 .WithMany(u => u.BookingsAsDriver)
                 .HasForeignKey(b => b.DriverId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Booking>()
                 .HasOne(b => b.Passenger)
                 .WithMany(u => u.BookingsAsPassenger)
                 .HasForeignKey(b => b.PassengerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             // Configure BookingParticipant Relationships
             builder.Entity<BookingParticipant>()

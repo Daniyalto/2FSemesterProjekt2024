@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _2FSemesterProjekt2024.Migrations
 {
     /// <inheritdoc />
-    public partial class tabless : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,7 +39,7 @@ namespace _2FSemesterProjekt2024.Migrations
                     VehicleInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Points = table.Column<int>(type: "int", nullable: true),
+                    Points = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -188,14 +188,12 @@ namespace _2FSemesterProjekt2024.Migrations
                         name: "FK_Bookings_AspNetUsers_DriverId",
                         column: x => x.DriverId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bookings_AspNetUsers_PassengerId",
                         column: x => x.PassengerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -236,9 +234,9 @@ namespace _2FSemesterProjekt2024.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "52b70026-89cc-4390-bd20-06f3bf828bcb", null, "PassengerDriver", "PASSENGERDRIVER" },
-                    { "5e9ec6b4-d333-4fc7-b7b6-aad27e1d08f1", null, "Driver", "DRIVER" },
-                    { "6950341e-f762-4cc2-bbbc-40e0170c2a8e", null, "Passenger", "PASSENGER" }
+                    { "703bfed4-0cff-425d-ad7e-b204d69cc13a", null, "Passenger", "PASSENGER" },
+                    { "a88c955d-387b-4958-aaee-b5ae68168844", null, "Driver", "DRIVER" },
+                    { "ac171c43-4388-4de7-b493-ece6b0ebb68f", null, "PassengerDriver", "PASSENGERDRIVER" }
                 });
 
             migrationBuilder.CreateIndex(

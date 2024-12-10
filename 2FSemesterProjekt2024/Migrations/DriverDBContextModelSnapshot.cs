@@ -51,19 +51,19 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6950341e-f762-4cc2-bbbc-40e0170c2a8e",
+                            Id = "703bfed4-0cff-425d-ad7e-b204d69cc13a",
                             Name = "Passenger",
                             NormalizedName = "PASSENGER"
                         },
                         new
                         {
-                            Id = "5e9ec6b4-d333-4fc7-b7b6-aad27e1d08f1",
+                            Id = "a88c955d-387b-4958-aaee-b5ae68168844",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "52b70026-89cc-4390-bd20-06f3bf828bcb",
+                            Id = "ac171c43-4388-4de7-b493-ece6b0ebb68f",
                             Name = "PassengerDriver",
                             NormalizedName = "PASSENGERDRIVER"
                         });
@@ -239,7 +239,7 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Points")
+                    b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Rating")
@@ -399,12 +399,12 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "Driver")
                         .WithMany("BookingsAsDriver")
                         .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "Passenger")
                         .WithMany("BookingsAsPassenger")
                         .HasForeignKey("PassengerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Driver");
 
