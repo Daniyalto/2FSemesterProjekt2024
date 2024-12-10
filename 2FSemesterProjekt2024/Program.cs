@@ -27,8 +27,7 @@ namespace _2FSemesterProjekt2024
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DriverDBContext>();
 
-            //builder.Services.AddTransient<IBookingService, EFBookingService>();
-         
+           
 
             builder.Services.AddSession(options =>
             {
