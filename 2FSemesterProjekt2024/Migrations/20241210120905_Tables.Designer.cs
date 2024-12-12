@@ -12,8 +12,8 @@ using _2FSemesterProjekt2024.Services;
 namespace _2FSemesterProjekt2024.Migrations
 {
     [DbContext(typeof(DriverDBContext))]
-    [Migration("20241209092919_Booking")]
-    partial class Booking
+    [Migration("20241210120905_Tables")]
+    partial class Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,19 +54,19 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "569a40f6-d3ac-4050-90ac-86341cfb4905",
+                            Id = "703bfed4-0cff-425d-ad7e-b204d69cc13a",
                             Name = "Passenger",
                             NormalizedName = "PASSENGER"
                         },
                         new
                         {
-                            Id = "9eb056d4-9d5b-4e0a-8e38-3ab4d987fd05",
+                            Id = "a88c955d-387b-4958-aaee-b5ae68168844",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "735f738c-b9b2-4f81-976a-2bbc8088dfdd",
+                            Id = "ac171c43-4388-4de7-b493-ece6b0ebb68f",
                             Name = "PassengerDriver",
                             NormalizedName = "PASSENGERDRIVER"
                         });
@@ -192,15 +192,13 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -212,17 +210,14 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LicenseNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -247,12 +242,8 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Points")
+                    b.Property<int>("Points")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProfilePictureUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<decimal?>("Rating")
                         .HasColumnType("decimal(18,2)");
@@ -268,8 +259,7 @@ namespace _2FSemesterProjekt2024.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("VehicleInfo")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -293,10 +283,9 @@ namespace _2FSemesterProjekt2024.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
                     b.Property<DateTime>("BookingTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DriverId")
@@ -304,10 +293,6 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.Property<string>("DropoffLocation")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("PassengerDriverId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassengerId")
@@ -315,14 +300,12 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.Property<string>("PickupLocation")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Seats")
+                    b.Property<int?>("Seats")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.HasKey("BookingId");
@@ -331,7 +314,36 @@ namespace _2FSemesterProjekt2024.Migrations
 
                     b.HasIndex("PassengerId");
 
-                    b.ToTable("Booking");
+                    b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("_2FSemesterProjekt2024.Models.BookingParticipant", b =>
+                {
+                    b.Property<int>("ParticipantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParticipantId"));
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoleDescription")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ParticipantId");
+
+                    b.HasIndex("BookingId");
+
+                    b.HasIndex("RoleDescription");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BookingParticipants");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -390,23 +402,58 @@ namespace _2FSemesterProjekt2024.Migrations
                     b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "Driver")
                         .WithMany("BookingsAsDriver")
                         .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "Passenger")
                         .WithMany("BookingsAsPassenger")
                         .HasForeignKey("PassengerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Driver");
 
                     b.Navigation("Passenger");
                 });
 
+            modelBuilder.Entity("_2FSemesterProjekt2024.Models.BookingParticipant", b =>
+                {
+                    b.HasOne("_2FSemesterProjekt2024.Models.Booking", "Booking")
+                        .WithMany("BookingParticipants")
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "RoleDescriptionUser")
+                        .WithMany("RoleDescriptions")
+                        .HasForeignKey("RoleDescription")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("_2FSemesterProjekt2024.Models.ApplicationUser", "User")
+                        .WithMany("BookingParticipants")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("RoleDescriptionUser");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("_2FSemesterProjekt2024.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("BookingParticipants");
+
                     b.Navigation("BookingsAsDriver");
 
                     b.Navigation("BookingsAsPassenger");
+
+                    b.Navigation("RoleDescriptions");
+                });
+
+            modelBuilder.Entity("_2FSemesterProjekt2024.Models.Booking", b =>
+                {
+                    b.Navigation("BookingParticipants");
                 });
 #pragma warning restore 612, 618
         }

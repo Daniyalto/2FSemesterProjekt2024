@@ -34,11 +34,16 @@
                 <input asp-for="Booking.DropoffLocation" class="form-control" />
                 <span asp-validation-for="Booking.DropoffLocation" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Booking.Seats" class="control-label"></label>
-                <input asp-for="Booking.Seats" class="form-control" />
-                <span asp-validation-for="Booking.Seats" class="text-danger"></span>
-            </div>
+
+            @if (User.IsInRole("Driver"))
+            {
+                <div class="form-group">
+                    <label asp-for="Booking.Seats" class="control-label"></label>
+                    <input asp-for="Booking.Seats" class="form-control" />
+                    <span asp-validation-for="Booking.Seats" class="text-danger"></span>
+                </div>
+            }
+            
             <div class="form-group">
                 <label asp-for="Booking.BookingTime" class="control-label"></label>
                 <input asp-for="Booking.BookingTime" class="form-control" />
