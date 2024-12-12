@@ -6,10 +6,10 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>AvailableBookings</h1>
+<h1 class=" eco-header">AvailableBookings</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -56,11 +56,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Passenger.Id)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.BookingId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
-            </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingId" class="btn btn-eco-edit">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.BookingId" class="btn btn-eco-details">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.BookingId" class="btn btn-eco-delete">Delete</a>
+                </td>
+
         </tr>
 }
     </tbody>
