@@ -118,34 +118,29 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            // Get all bookings where the user is the driver or passenger
             var bookingsToDelete = await _driverContext.Bookings
                 .Where(b => b.DriverId == user.Id || b.PassengerId == user.Id)
                 .ToListAsync();
 
-            // Get all bookingparticipants
             var bookingParticipantsToDelete = await _driverContext.BookingParticipants
                .Where(bp => bp.UserId == user.Id)
                .ToListAsync();
 
 
-            // Remove all bookingparticipants associated with the user
             if (bookingParticipantsToDelete.Any())
             {
                 _driverContext.BookingParticipants.RemoveRange(bookingParticipantsToDelete);
-                await _driverContext.SaveChangesAsync(); // Save changes before deleting bookings
+                await _driverContext.SaveChangesAsync(); 
             }
 
 
-            // Remove all bookings associated with the user
             if (bookingsToDelete.Any())
             {
                 _driverContext.Bookings.RemoveRange(bookingsToDelete);
-                await _driverContext.SaveChangesAsync(); // Save changes before deleting user
+                await _driverContext.SaveChangesAsync(); 
             }
 
 
-            // Now delete the user
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
 
