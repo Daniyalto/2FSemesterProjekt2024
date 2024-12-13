@@ -20,3 +20,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+:root {
+    --primary-green: #d4f4dd;
+    --secondary-green: #a8e6a3;
+}
+
+.navbar {
+    background-color: var(--secondary-green);
+}
+
+.navbar-brand, .nav-link {
+    color: #000 !important;
+}
+
+.btn-green {
+    background-color: var(--secondary-green) !important;
+    color: #000 !important;
+    border: none;
+    text-decoration: none;
+}
+
+    .btn-green:hover {
+        color: #000 !important;
+        background-color: var(--secondary-green) !important;
+    }
+
+.card {
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
