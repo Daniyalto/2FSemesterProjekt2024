@@ -21,24 +21,6 @@ body {
   margin-bottom: 60px;
 }
 
-:root {
-    --primary-green: #d4f4dd;
-    --secondary-green: #a8e6a3;
-}
-
-body {
-    background-color: var(--primary-green);
-    color: #333;
-}
-
-.navbar {
-    background-color: var(--secondary-green);
-}
-
-.navbar-brand, .nav-link {
-    color: #fff !important;
-}
-
 .btn-green {
     background-color: var(--secondary-green);
     color: #fff;
