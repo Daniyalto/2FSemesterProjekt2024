@@ -20,21 +20,13 @@ html {
 body {
   margin-bottom: 60px;
 }
-
-.btn-green {
-    background-color: var(--secondary-green);
-    color: #fff;
-    border: none;
-}
-
-    .btn-green:hover {
-        background-color: #91d68f;
     }
 
 .card {
     border: none;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 /* Header: Calming Green */
 .eco-header {
@@ -88,4 +80,3 @@ body {
 
     .btn-eco-delete:hover {
         background-color: #b52b27; /* Darker red for hover effect */
-
