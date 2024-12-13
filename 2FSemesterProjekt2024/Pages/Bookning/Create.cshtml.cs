@@ -54,9 +54,6 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
             }
 
 
-            Booking.CreatedAt = DateTime.UtcNow;
-            Booking.UpdatedAt = DateTime.UtcNow;
-
             _context.Bookings.Add(Booking);
             await _context.SaveChangesAsync();
 

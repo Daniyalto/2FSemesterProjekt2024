@@ -20,3 +20,81 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+footer {
+    margin-top: auto;
+}
+
+:root {
+    --primary-green:  #d4f4dd;
+    --secondary-green: #a8e6a3;
+}
+
+.navbar{
+    background-color: var(--secondary-green);
+}
+
+.navbar-brand, nav-link{
+    color: #000 !important;
+}
+
+.btn-green {
+    background-color: var(--secondary-green);
+    color: #fff;
+    border: none;
+}
+
+    .btn-green:hover {
+        background-color: #91d68f;
+    }
+
+.card {
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit Button: Earthy Green */
+.btn-eco-edit {
+    background-color: #4caf50; /* Earthy green */
+    color: white;
+    border: 2px solid #388e3c; /* Darker green border */
+    padding: 3px 8px; /* Smaller padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+    .btn-eco-edit:hover {
+        background-color: #388e3c; /* Darker green for hover effect */
+    }
+
+/* Details Button: Warm Brown */
+.btn-eco-details {
+    background-color: #8b5e3c; /* Earthy brown */
+    color: white;
+    border: 2px solid #6f4426; /* Darker brown border */
+    padding: 3px 8px; /* Smaller padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+    .btn-eco-details:hover {
+        background-color: #6f4426; /* Darker brown for hover effect */
+    }
+
+/* Delete Button: Muted Earthy Red */
+.btn-eco-delete {
+    background-color: #d9534f; /* Muted red */
+    color: white;
+    border: 2px solid #b52b27; /* Darker red border */
+    padding: 3px 8px; /* Smaller padding */
+    font-size: 0.9rem; /* Slightly smaller font */
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+    .btn-eco-delete:hover {
+        background-color: #b52b27; /* Darker red for hover effect */
+    }

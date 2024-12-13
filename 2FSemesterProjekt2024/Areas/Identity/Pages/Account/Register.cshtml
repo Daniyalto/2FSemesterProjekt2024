@@ -14,19 +14,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
                     <div class="form-floating mb-3">
-    <h4>Select Roles:</h4>
+    <h4>Select your desired role:</h4>
     <div>
-        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" />
+        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" required/>
         <label for="role-Driver">Driver</label>
     </div>
     <div>
-        <input type="radio" id="role-Passenger" name="Input.SelectedRoles" value="Passenger" />
+        <input type="radio" id="role-Passenger" name="Input.SelectedRoles" value="Passenger" required/>
         <label for="role-Passenger">Passenger</label>
     </div>
-    <div>
-        <input type="radio" id="role-PassengerDriver" name="Input.SelectedRoles" value="PassengerDriver" />
-        <label for="role-PassengerDriver">PassengerDriver</label>
-    </div>
+   
 </div>
             
             <div class="form-floating mb-3">
@@ -92,7 +89,7 @@
             </div> *@
             
 
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-eco-edit btn-lg p-2">Register</button>
 
         </form>
     </div>
@@ -140,7 +137,7 @@
             radio.addEventListener('change', function () {
                 const driverFields = document.getElementById('driverFields');
                 // Show fields if Driver or PassengerDriver is selected
-                if (this.value === 'Driver' || this.value === 'PassengerDriver') {
+                if (this.value === 'Driver') {
                     driverFields.style.display = 'block'; // Show driver-specific fields
                 } else {
                     driverFields.style.display = 'none'; // Hide driver-specific fields

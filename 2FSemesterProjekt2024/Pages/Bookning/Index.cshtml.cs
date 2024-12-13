@@ -18,35 +18,42 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly _2FSemesterProjekt2024.Services.DriverDBContext _context;
+        private readonly DriverDBContext _context;
 
-        public IndexModel(_2FSemesterProjekt2024.Services.DriverDBContext context)
+        public IndexModel(DriverDBContext context)
         {
             _context = context;
         }
 
-        public IList<Booking> Booking { get;set; } = default!;
+        public IList<Booking> Booking { get; set; } = default!;
 
         public string UserId { get; set; }
 
-
-
         public async Task OnGetAsync()
         {
-            UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (User.IsInRole("Driver"))
             {
                 Booking = await _context.Bookings
-               .Include(b => b.Driver)
-               .Where(b => b.Driver.Id == UserId).ToListAsync();
+                    .Include(b => b.Driver)
+                    .Where(b => b.Driver.Id == UserId)
+                    .ToListAsync();
             }
-            if (User.IsInRole("Passenger"))
+            else if (User.IsInRole("Passenger"))
             {
                 Booking = await _context.Bookings
-               .Include(b => b.Passenger)
-               .Where(b => b.Passenger.Id == UserId)
-               .ToListAsync();
+                    .Include(b => b.Passenger)
+                    .Where(b => b.Passenger.Id == UserId)
+                    .ToListAsync();
+            }
+            else if (User.IsInRole("PassengerDriver"))
+            {
+                Booking = await _context.Bookings
+                .Include(b => b.Driver)
+                .Include(b => b.Passenger)
+                .Where(b => b.DriverId == UserId || b.PassengerId == UserId)
+                .ToListAsync();
             }
         }
     }

@@ -84,7 +84,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
                 Booking.PassengerId = UserId;
             }
 
-            
+
             _context.Bookings.Update(Booking);
             await _context.SaveChangesAsync();
 

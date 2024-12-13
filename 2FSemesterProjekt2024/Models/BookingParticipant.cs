@@ -1,5 +1,4 @@
-﻿using _2FSemesterProjekt2024.Models._2FSemesterProjekt2024.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace _2FSemesterProjekt2024.Models
 {
