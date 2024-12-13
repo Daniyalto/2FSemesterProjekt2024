@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Your bookings</h1>
+<h1 class =" eco-header">Your bookings</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -51,9 +51,9 @@
                 @Html.DisplayFor(modelItem => item.Passenger.FirstName) @Html.DisplayFor(modelItem => item.Passenger.LastName)
             </td> *@
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.BookingId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingId" class="btn btn-eco-edit">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.BookingId" class="btn btn-eco-details">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.BookingId" class="btn btn-eco-delete">Delete</a>
                     <a href="https://www.google.com/maps/search/?api=1&query=@item.PickupLocation" target="_blank">
                         <img src="https://maps.googleapis.com/maps/api/staticmap?center=@item.PickupLocation&zoom=14&size=150x150&maptype=roadmap
                     &markers=color:red%7Clabel:P%7C@item.PickupLocation&key=AIzaSyA7EgN8WzFZAL9GKNoPO6J3m1cX0E-j738"
