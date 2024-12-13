@@ -38,33 +38,6 @@ body {
 
 
 
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
-
-:root {
-    --primary-green: #d4f4dd;
-    --secondary-green: #a8e6a3;
-}
 
 .btn-green {
     background-color: var(--secondary-green);
@@ -81,15 +54,7 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-/* Header: Calming Green */
-.eco-header {
-    color: #2d6a4f; /* A calming green */
-    font-family: 'Georgia', serif; /* A natural, elegant font */
-    text-shadow: 1px 1px 2px #a3b18a; /* Subtle shadow for depth */
-    border-bottom: 2px solid #95d5b2; /* A soft green border to underline */
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
+
 /* Edit Button: Earthy Green */
 .btn-eco-edit {
     background-color: #4caf50; /* Earthy green */
