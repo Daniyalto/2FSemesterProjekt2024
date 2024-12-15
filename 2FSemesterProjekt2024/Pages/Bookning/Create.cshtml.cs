@@ -30,6 +30,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -37,9 +38,9 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
                 return Page();
             }
 
-            var userName = User.Identity?.Name;
+            var userMail = User.Identity?.Name;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName || u.Email == userName);
+            var user = await _context.Users.FirstOrDefaultAsync(u => /*u.UserName == userName ||*/ u.Email == userMail);
 
             if (User.IsInRole("Driver"))
             {
