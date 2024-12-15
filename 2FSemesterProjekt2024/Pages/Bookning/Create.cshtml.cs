@@ -24,8 +24,6 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
         public IActionResult OnGet()
         {
-        //ViewData["DriverId"] = new SelectList(_context.Users, "Id", "Id");
-        //ViewData["PassengerId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 
