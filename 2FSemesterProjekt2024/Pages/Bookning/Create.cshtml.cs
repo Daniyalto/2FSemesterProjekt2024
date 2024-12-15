@@ -38,9 +38,9 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
                 return Page();
             }
 
-            var userMail = User.Identity?.Name;
+            var userName = User.Identity?.Name;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => /*u.UserName == userName ||*/ u.Email == userMail);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (User.IsInRole("Driver"))
             {
