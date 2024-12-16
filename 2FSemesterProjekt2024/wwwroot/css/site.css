@@ -38,16 +38,6 @@ footer {
     color: #000 !important;
 }
 
-.btn-green {
-    background-color: var(--secondary-green);
-    color: #fff;
-    border: none;
-}
-
-    .btn-green:hover {
-        background-color: #91d68f;
-    }
-
 .card {
     border: none;
     background-color: #fff;
