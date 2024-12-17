@@ -13,12 +13,12 @@ namespace _2FSemesterProjekt2024.Models
         public string? PassengerId { get; set; } // Foreign Key to AspNetUsers for Passenger
         public ApplicationUser? Passenger { get; set; } // Navigation property for Passenger
 
-        public string PickupLocation { get; set; } = null!; // Required field
-        public string DropoffLocation { get; set; } = null!; // Required field
-        public int? Seats { get; set; } // Optional field
-        public DateTime BookingTime { get; set; } // Required field
-        public DateTime CreatedAt { get; set; } // Required field
-        public DateTime? UpdatedAt { get; set; } // Optional field
+        public string PickupLocation { get; set; } = null!; 
+        public string DropoffLocation { get; set; } = null!; 
+        public int? Seats { get; set; } 
+        public DateTime BookingTime { get; set; } 
+        public DateTime CreatedAt { get; set; } 
+        public DateTime? UpdatedAt { get; set; } 
 
         // New relationship: One Booking can have many BookingParticipants
         public ICollection<BookingParticipant> BookingParticipants { get; set; } = new List<BookingParticipant>();
