@@ -24,15 +24,13 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
         public IActionResult OnGet()
         {
-        //ViewData["DriverId"] = new SelectList(_context.Users, "Id", "Id");
-        //ViewData["PassengerId"] = new SelectList(_context.Users, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
         public Booking Booking { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -42,7 +40,7 @@ namespace _2FSemesterProjekt2024.Pages.Bookning
 
             var userName = User.Identity?.Name;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName || u.Email == userName);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (User.IsInRole("Driver"))
             {
