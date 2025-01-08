@@ -14,8 +14,8 @@
 
                     <div class="form-floating mb-3">
     <h4>Select your desired role:</h4>
-    <div>
-        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" required/>
+    <div> 
+        <input type="radio" id="role-Driver" name="Input.SelectedRoles" value="Driver" required/> 
         <label for="role-Driver">Driver</label>
     </div>
     <div>
@@ -100,13 +100,19 @@
 @section Scripts 
 {
     <script>
-        document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => {
-            radio.addEventListener('change', function () {
+        // Select all input elements with the name "Input.SelectedRoles"
+        document.querySelectorAll('input[name="Input.SelectedRoles"]').forEach(radio => 
+        {   // Add an event listener to each radio button to listen for changes
+            radio.addEventListener('change', function () 
+            {
+                // Get the element with the ID 'driverFields'
                 const driverFields = document.getElementById('driverFields');
-                // Show fields if Driver or PassengerDriver is selected
-                if (this.value === 'Driver') {
+                if (this.value === 'Driver') 
+                {
                     driverFields.style.display = 'block'; // Show driver-specific fields
-                } else {
+                } 
+                else 
+                {
                     driverFields.style.display = 'none'; // Hide driver-specific fields
                 }
             });
