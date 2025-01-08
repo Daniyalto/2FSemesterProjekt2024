@@ -135,24 +135,26 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            returnUrl ??= Url.Content("~/"); // If no return URL is provided, default to the home page
+
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList(); // Retrieve the list of external authentication providers (e.g., Google, Facebook)
 
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                // Set the username and email address for the user
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                // Set additional properties on the user object
+                
+                // Set additional properties on the user object based on form inputs
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.Address = Input.Address;
                 user.VehicleInfo = Input.VehicleInfo;
                 user.LicenseNumber = Input.LicenseNumber;
-                
 
 
+                // Create the user in the database with the specified password
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -161,45 +163,51 @@ namespace _2FSemesterProjekt2024.Areas.Identity.Pages.Account
 
                     // Check if AvailableRoles is not null before iterating
                    
+                        // Assign roles to the user, if any are selected
                         foreach (var role in Input.SelectedRoles)
                         {
+                            // Check if the role exists before assigning it to the user
                             if (await _roleManager.RoleExistsAsync(role))
                             {
                                 await _userManager.AddToRoleAsync(user, role);
                             }
                         }
-                    
-                   
 
+
+                    // Generate a confirmation token for email verification
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    // Encode the token in a format suitable for URLs
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    // Construct the confirmation email link
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-
+                    // Send the confirmation email
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                    // Redirect based on account confirmation requirements
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
+                        // Otherwise, sign the user in and redirect to the specified URL
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
                 }
+                // Add any errors encountered during user creation to the ModelState for display
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // If validation fails or account creation encounters errors, redisplay the form
             return Page();
         }
 
